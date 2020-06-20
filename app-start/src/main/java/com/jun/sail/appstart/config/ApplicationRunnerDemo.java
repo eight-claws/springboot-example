@@ -19,7 +19,7 @@ public class ApplicationRunnerDemo implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         try {
 
-            log.info(AppStartConstant.LOG_SPARATOR + "[ApplicationRunner]");
+            log.info(AppStartConstant.LOG_SPARATOR + "[ ApplicationRunner ]");
             //throw new RuntimeException("任务执行失败");
         }catch (Exception e){
             log.error("fail ,app start error", e);
