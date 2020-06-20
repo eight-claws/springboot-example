@@ -16,6 +16,6 @@ public class AppTestInitializer implements SmartInitializingSingleton {
 
     @Override
     public void afterSingletonsInstantiated() {
-        log.info(AppStartConstant.LOG_SPARATOR + "app init from SmartInitializingSingleton-afterSingletonsInstantiated()");
+        log.info(AppStartConstant.LOG_SPARATOR + "[ SmartInitializingSingleton ]  -afterSingletonsInstantiated()");
     }
 }

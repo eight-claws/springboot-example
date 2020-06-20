@@ -44,7 +44,7 @@ public class MqConnConfig implements SmartLifecycle {
 
     @Override
     public void start() {
-        log.info(AppStartConstant.LOG_SPARATOR + "app start, SmartLifecycle-start() is invoked");
+        log.info(AppStartConstant.LOG_SPARATOR + "[ SmartLifecycle ]");
         setRunning(true);
 
     }

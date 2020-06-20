@@ -17,7 +17,7 @@ public class EventListenerDemo {
     @EventListener(classes = ApplicationReadyEvent.class)
     public void init(){
 
-        log.info(AppStartConstant.LOG_SPARATOR + "app start, listener ApplicationReadyEvent");
+        log.info(AppStartConstant.LOG_SPARATOR + "[ listener ApplicationReadyEvent ]");
     }
 
 
