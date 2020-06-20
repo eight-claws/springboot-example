@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!--声明项目描述符遵循哪一个POM模型版本。模型本身的版本很少改变，虽然如此，但它仍然是必不可少的，
+    这是为了当Maven引入了新的特性或者其他模型变更的时候，确保稳定性。 -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.jun.cloud</groupId>
+    <artifactId>springboot-demo</artifactId>
+    <!--此处的version会被子所有工程继承。要修改版本号，只需修改此处和子类中parent项目的版本即可-->
+    <version>1.0.1-SNAPSHOT</version>
+    <!--项目产生的构件类型，例如jar、war、ear、pom。插件可以创建他们自己的构件类型，所以前面列的不是全部构件类型 -->
+    <packaging>pom</packaging>
+
+
+    <!--父项目的坐标，父POM 包含了一些可以被继承的默认设置-->
+    <parent>
+        <groupId>com.jun.sail</groupId>
+        <artifactId>sail-parent-dependence</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <!--包含的子模块-->
+    <modules>
+        <module>cloud-api</module>
+        <module>cloud-common</module>
+        <module>cloud-modules</module>
+        <module>cloud-start</module>
+    </modules>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--因为子类的版本号都继承本项目的版本号，所以都为project.version。此处的定义为了子工程之间的依赖-->
+            <dependency>
+                <groupId>com.jun.cloud</groupId>
+                <artifactId>cloud-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.jun.cloud</groupId>
+                <artifactId>cloud-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.jun.cloud</groupId>
+                <artifactId>restful</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.jun.cloud</groupId>
+                <artifactId>cloud-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+
+    <repositories>
+        <repository>
+            <id>alimaven</id>
+            <name>aliyun maven</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+                <!--注意这里一般要设置java版本，不然下面的项目jdk可能会退回低版本。
+                不能放在start中，要放在聚合父工程中-->
+                <configuration>
+                    <source>${java.version}</source><!-- 源代码使用的开发版本 -->
+                    <target>${java.version}</target><!-- 需要生成的目标class文件的编译版本 -->
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <!-- 这个插件可以在发布jar包到仓库时将源码也上传到仓库-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+
+
+
+</project>

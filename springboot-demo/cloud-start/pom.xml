@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>cloud-start</artifactId>
+    <packaging>war</packaging>
+
+    <!--项目的名称和详细描述, Maven产生的文档用,基本可以省略 -->
+    <name>cloud-start</name>
+    <description>start project for Spring Boot</description>
+
+    <parent>
+        <groupId>com.jun.cloud</groupId>
+        <artifactId>springboot-demo</artifactId>
+        <version>1.0.1-SNAPSHOT</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!--利用外部容器tomcat运行项目时应该添加此依赖，注意scope为provided-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <!--添加此依赖后还是springboot的main启动，此处就应该是compile即运行时也需要，
+            否则idea会报NoClassDefFoundError: javax/servlet/ServletContext错误-->
+        <!--<scope>provided</scope>-->
+        </dependency>
+
+        <!--spring的热部署，注意要修改idea配置complie的自动编译-->
+        <!--<dependency>-->
+        <!--<groupId>org.springframework.boot</groupId>-->
+        <!--<artifactId>spring-boot-devtools</artifactId>-->
+        <!--</dependency>-->
+
+        <!-- 本项目模块start-->
+        <dependency>
+            <groupId>com.jun.cloud</groupId>
+            <artifactId>restful</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jun.cloud</groupId>
+            <artifactId>cloud-api</artifactId>
+        </dependency>
+        <!-- 本项目模块end-->
+    </dependencies>
+
+
+
+    <build>
+        <!--指定生成war包的名称-->
+        <finalName>cloudStart</finalName>
+        <plugins>
+            <!--用于打war包-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+
+            <!--这个依赖要在start工程中，会去寻找main方法，repackage成cloudStart.war.original-->
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--                &lt;!&ndash;<executions>&ndash;&gt;-->
+<!--                &lt;!&ndash;<execution>&ndash;&gt;-->
+<!--                &lt;!&ndash;<goals>&ndash;&gt;-->
+<!--                &lt;!&ndash;<goal>repackage</goal>&ndash;&gt;-->
+<!--                &lt;!&ndash;</goals>&ndash;&gt;-->
+<!--                &lt;!&ndash;</execution>&ndash;&gt;-->
+<!--                &lt;!&ndash;</executions>&ndash;&gt;-->
+<!--                <configuration>-->
+<!--                    <executable>true</executable>-->
+<!--                    <fork>true</fork>&lt;!&ndash; 如果没有该配置，热部署的devtools不生效 &ndash;&gt;-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+        </plugins>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+    </build>
+
+
+</project>

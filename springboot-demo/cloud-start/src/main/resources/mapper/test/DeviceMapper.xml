@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jun.cloud.service.mapper.DeviceMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.jun.cloud.service.entity.Device">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="region_code" property="regionCode" />
+        <result column="region_path" property="regionPath" />
+        <result column="treaty_type" property="treatyType" />
+        <result column="ip" property="ip" />
+        <result column="port" property="port" />
+        <result column="delete_status" property="deleteStatus" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+
+    <select id="queryDevicePage" resultType="com.jun.cloud.service.dto.DeviceListDto">
+        SELECT
+        d.id as id,
+        d.name as deviceName,
+        d.region_code as regionCode,
+        d.region_path as regionPath,
+        d.treaty_type as treatyType,
+        d.ip as ip,
+        d.port as port
+        FROM
+        device d
+        WHERE
+        d.region_code = #{queryDto.regionCode}
+        <if test="queryDto.deviceName != null and queryDto.deviceName != ''">
+            and d.name like CONCAT('%',#{queryDto.deviceName},'%')  ESCAPE '/'
+        </if>
+
+        <if test="queryDto.treatyType != null and queryDto.treatyType != ''">
+            AND d.treaty_type = #{queryDto.treatyType}
+        </if>
+        order by d.update_time desc
+        limit #{queryDto.pageSize} OFFSET #{queryDto.pageNo}
+    </select>
+
+    <select id="countDevicePage" resultType="java.lang.Long">
+        SELECT
+       count(*)
+        FROM
+        device d
+        WHERE
+        d.region_code = #{queryDto.regionCode}
+        <if test="queryDto.deviceName != null and queryDto.deviceName != ''">
+            and d.name like CONCAT('%',#{queryDto.deviceName},'%')  ESCAPE '/'
+        </if>
+
+        <if test="queryDto.treatyType != null and queryDto.treatyType != ''">
+            AND d.treaty_type = #{queryDto.treatyType}
+        </if>
+    </select>
+
+
+</mapper>
