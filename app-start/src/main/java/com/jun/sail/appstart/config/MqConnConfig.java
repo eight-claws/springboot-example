@@ -24,25 +24,6 @@ public class MqConnConfig implements SmartLifecycle {
 
 
     @Override
-    public void stop(Runnable callback) {
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                log.info(AppStartConstant.LOG_SPARATOR + "SmartLifecycle-start(Runnable callback) is invoked");
-
-                //设置为false，表示已经不在执行中了
-                setRunning(false);
-
-                //callback中有个CountDownLatch实例，总数是SmartLifecycle对象的数量，
-                //此方法被回调时CountDownLatch实例才会减一，初始化容器的线程一直在wait中；
-                callback.run();
-            }
-        }).start();
-    }
-
-
-    @Override
     public void start() {
         log.info(AppStartConstant.LOG_SPARATOR + "[ SmartLifecycle ]");
         setRunning(true);
@@ -54,6 +35,25 @@ public class MqConnConfig implements SmartLifecycle {
         log.info(AppStartConstant.LOG_SPARATOR + "app stop, SmartLifecycle-stop() is invoked");
         setRunning(false);
     }
+
+    @Override
+    public void stop(Runnable callback) {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                log.info(AppStartConstant.LOG_SPARATOR + "app stop, SmartLifecycle-start(Runnable callback) is invoked");
+
+                //设置为false，表示已经不在执行中了
+                setRunning(false);
+
+                //callback中有个CountDownLatch实例，总数是SmartLifecycle对象的数量，
+                //此方法被回调时CountDownLatch实例才会减一，初始化容器的线程一直在wait中；
+                callback.run();
+            }
+        }).start();
+    }
+
 
     @Override
     public boolean isRunning() {

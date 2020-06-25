@@ -18,7 +18,6 @@ public class DataProperties {
 
     private UserProps user;
 
-    // device used for connectivity test
     private Device connect;
 
     private List<Device> devices;
