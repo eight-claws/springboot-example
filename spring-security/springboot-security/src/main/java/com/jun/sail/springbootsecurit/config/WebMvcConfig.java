@@ -10,6 +10,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("redirect:/login");//访问/时跳转到springsecurity提供的login页面
+        //registry.addViewController("/login-view").setViewName("login.html");//访问/时跳转到login.html页面
     }
 
 }

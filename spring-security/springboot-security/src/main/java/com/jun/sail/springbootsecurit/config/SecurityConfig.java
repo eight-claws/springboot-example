@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -35,6 +36,37 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //manager.createUser(User.withUsername("u1").password("123456").authorities("info").build());
         //manager.createUser(User.withUsername("u2").password("123456").authorities("fans").build());
         //return manager;
+    }
+
+
+
+    /**
+     * 配置安全拦截配置
+     */
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        //禁用跨站请求伪造拦截
+        http.csrf().disable();
+
+        http.authorizeRequests()
+
+                //控制用户在访问/qq/info路径时必须有info授权，UserDetailsService里面配置的
+                .antMatchers("/qq/info/**").hasAuthority("info")
+                .antMatchers("/qq/fans/**").hasAuthority("fans")
+
+                //所有/qq开头的请求都必须经过认证
+                .antMatchers("/qq/**").authenticated()
+                //其他请求放行
+                .anyRequest().permitAll()
+                //允许表单登陆，登陆成功后转到/login-success页面
+                .and().formLogin()
+                .successForwardUrl("/login-success");
+
+        //spring-security的会话控制: always-没有session就创建，IF_REQUIRED有需要就登陆时创建一个，never不会创建，但是如果其他地方创建了就会使用
+        //STATELESS绝对不会创建session，也不会使用session，生产中为了安全都要求传token，所以一般采用STATELESS
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+
     }
 
 
@@ -78,26 +110,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     //}
 
 
-
-    /**
-     * 配置安全拦截配置
-     */
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-
-        http.authorizeRequests()
-
-                //控制用户在访问/qq/info路径时必须有info授权，UserDetailsService里面配置的
-                .antMatchers("/qq/info/**").hasAuthority("info")
-                .antMatchers("/qq/fans/**").hasAuthority("fans")
-
-                //所有/qq开头的请求都必须经过认证
-                .antMatchers("/qq/**").authenticated()
-                //其他请求放行
-                .anyRequest().permitAll()
-                //允许表单登陆，登陆成功后转到/login-success页面
-                .and().formLogin().successForwardUrl("/login-success");
+    //@Bean
+    //public AuthenticationProvider authenticationProvider() {
+    //    DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+    //    daoAuthenticationProvider.setUserDetailsService(accountService);
+    //    daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+    //    return daoAuthenticationProvider;
+    //}
 
 
-    }
+
 }
