@@ -1,5 +1,7 @@
 ## 基于spring-security实现OAUTH2.0
 
+https://www.cnblogs.com/lenve/p/12695733.html
+
 授权码authorization code模式使用步骤：
 1.获取code，访问`http://localhost:8080/oauth/authorize?response_type=code&client_id=client_1&redirect_uri=www.baidu.com&scope=all`,返回code，`http://localhost:8080/oauth/www.baidu.com?code=jr5hLL`
 
