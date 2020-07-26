@@ -12,13 +12,14 @@ import java.util.List;
 @Setter
 @Component
 @ConfigurationProperties("data.redis")
-@PropertySource(value = "classpath:data/redis/test.properties", ignoreResourceNotFound = true)
+@PropertySource(value = "classpath:data/read/test.properties", ignoreResourceNotFound = true)
 //@PropertySource(value = "file://${CONFIG_HOME}/data/redis/test.properties", ignoreResourceNotFound = true)
 public class DataProperties {
 
     private UserProps user;
 
     private Device connect;
+    private String oauthJwtSecret;
 
     private List<Device> devices;
 
