@@ -8,7 +8,6 @@ import java.util.Collection;
 
 @Data
 public class OAuthUserDetailsResponse implements UserDetails {
-
     private static final long serialVersionUID = 156482318489L;
 
     private long id;

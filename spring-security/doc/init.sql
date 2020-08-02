@@ -20,6 +20,18 @@ insert into T_USER_ACCOUNT (EMAIL, PASSWORD, NICKNAME)
 value ('test@163.com', '123456', '小度音箱')
 
 
+CREATE TABLE T_OAUTH_CODE
+(
+    ID             BIGSERIAL    PRIMARY KEY,
+    CODE           VARCHAR(255)  NOT NULL,
+    AUTHENTICATION text       NOT NULL,
+    CREATE_TIME timestamp without time zone NOT NULL DEFAULT now(),
+    UNIQUE (CODE)
+);
+
+COMMENT ON COLUMN T_OAUTH_CODE.CODE IS 'auth-code表';
+COMMENT ON COLUMN T_OAUTH_CODE.AUTHENTICATION IS '身份信息';
+COMMENT ON COLUMN T_OAUTH_CODE.CREATE_TIME IS '认证信息添加时间';
 
 
 create table oauth_client_details (

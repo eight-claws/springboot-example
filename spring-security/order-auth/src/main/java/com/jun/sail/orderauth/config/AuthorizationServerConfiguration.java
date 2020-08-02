@@ -15,6 +15,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
@@ -41,6 +42,9 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     private UserAccountService userAccountService;
 
     @Autowired
+    private AuthorizationCodeServices authorizationCodeServices;
+
+    @Autowired
     RedisConnectionFactory redisConnectionFactory;
     @Autowired
     private PasswordEncoder oauthClientSecretEncoder;
@@ -49,29 +53,8 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     @Autowired
     private DataSource dataSource;
 
-    @Override
-    public void configure(AuthorizationServerSecurityConfigurer oauthServer) {
-        oauthServer
-                .realm("oauth2-resources")
-                .tokenKeyAccess("permitAll()")
-                .checkTokenAccess("isAuthenticated()")
-                .passwordEncoder(oauthClientSecretEncoder)
-                .allowFormAuthenticationForClients();
-    }
-
-    @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
-        TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
-        tokenEnhancerChain.setTokenEnhancers(Arrays.asList(tokenEnhancer(), accessTokenConverter()));
-
-        endpoints.authenticationManager(authenticationManager)
-                .userDetailsService(userAccountService) //这里和SecurityConfiguration的userAccountService也可以不一样，为什么？
-                .tokenStore(tokenStore())
-                .tokenEnhancer(tokenEnhancerChain);
-    }
-
     /**
-     * 配置客户端的校验
+     * 配置客户端的信息
      */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
@@ -93,6 +76,39 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 //                .scopes("select")
 //                .redirectUris("http://www.baidu.com");
     }
+
+
+    /**
+     * 定义token endpoint相关的安全配置
+     */
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer oauthServer) {
+        oauthServer
+                .realm("oauth2-resources")
+                .tokenKeyAccess("permitAll()")
+                .checkTokenAccess("isAuthenticated()")
+                .passwordEncoder(oauthClientSecretEncoder)
+                .allowFormAuthenticationForClients();
+    }
+
+    /**
+     * 定义授权、token endpoint和token服务
+     *
+     * 必须要配置userDetailsService，才支持refresh token grant，to ensure that the account is still active
+     * 定义authorizationCodeServices支持auth code grant.
+     */
+    @Override
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
+        TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+        tokenEnhancerChain.setTokenEnhancers(Arrays.asList(tokenEnhancer(), accessTokenConverter()));
+
+        endpoints.authenticationManager(authenticationManager)
+                .userDetailsService(userAccountService) //这里和SecurityConfiguration的userAccountService也可以不一样，为什么？
+                .authorizationCodeServices(authorizationCodeServices)
+                .tokenStore(tokenStore())
+                .tokenEnhancer(tokenEnhancerChain);
+    }
+
 
     @Bean
     public TokenStore tokenStore() {
