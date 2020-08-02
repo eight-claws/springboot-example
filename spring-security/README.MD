@@ -1,5 +1,9 @@
-# 基于spring-security实现OAUTH2.0
-## How to use
+## About
+基于[spring-security-oauth](https://github.com/spring-projects/spring-security-oauth)实现OAUTH2.0
+为了尽量接近实际开发，认证服务和资源服务模块分开，用户和第三方客户端数据都放在数据库中
+
+## Getting Started
+启动redis服务和postgres数据库服务，数据库脚本和初始化数据在[init.sql](./doc/init.sql)
 启动order-api资源服务和order-auth认证服务
 
 授权码authorization code模式：
@@ -9,13 +13,13 @@
 	Get http://localhost:8080/oauth/authorize?
 	response_type=code
 	&client_id=client_2
-	&redirect_uri=www.baidu.com
+	&redirect_uri=http://www.baidu.com
 	&scope=select
 	```
-	跳转到登录页面，输入用户名密码 user_1 123456,点击允许授权后返回code
+	跳转到登录页面，输入用户名密码 test@163.com 123456,点击允许授权后，会再次跳转到redirect_uri指定的网址并返回code
 	
 	```
-	http://localhost:8080/oauth/www.baidu.com?code=oVm13H
+	https://www.baidu.com/?code=cDG0IN
 	```
 
 4.  根据code换取Token
@@ -25,8 +29,8 @@
 	client_id=client_2&
 	client_secret=123456&
 	grant_type=authorization_code&
-	code=IhUJjj&
-	redirect_uri=www.baidu.com
+	code=cDG0IN&
+	redirect_uri=http://www.baidu.com
 	```
 	返回
 	```
@@ -43,9 +47,9 @@
 	}
 	```
 3.然后访问资源服务：
-
 ```
 GET http://localhost:8081/openApi/order/1
 Accept: application/json
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3VudHJ5IjoiY2hpbmEiLCJhdWQiOlsib3BlbmFwaSJdLCJ1c2VyX25hbWUiOiJzYWlsIiwic2NvcGUiOlsic2VsZWN0Il0sImV4cCI6MTU5NjM4MjAyMSwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdLCJqdGkiOiI4Nzk1ZWViZC1kYjNlLTQ0MTktYWI5MC0zZjA5MjZjYzRhNTYiLCJhZ2UiOjY3LCJjbGllbnRfaWQiOiJjbGllbnRfMiJ9.8AqmwEsCbPdFFCezRdmxMOPe3AuuEAl1_yq3AACZtYs
 ```
+

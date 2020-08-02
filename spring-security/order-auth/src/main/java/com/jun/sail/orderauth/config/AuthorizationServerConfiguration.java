@@ -1,8 +1,9 @@
 package com.jun.sail.orderauth.config;
 
-import com.jun.sail.orderauth.oauth.RrJwtTokenEnhancer;
+import com.jun.sail.orderauth.oauth.JwtTokenEnhancer;
 import com.jun.sail.orderauth.config.props.OrderAuthProperties;
-import com.jun.sail.orderauth.service.OAuthClientDetailsService;
+import com.jun.sail.orderauth.oauth.service.OAuthClientDetailsService;
+import com.jun.sail.orderauth.oauth.service.UserAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,12 +15,10 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
-import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 import javax.sql.DataSource;
 import java.util.Arrays;
@@ -31,8 +30,16 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     @Autowired
     private OrderAuthProperties orderAuthProperties;
+
+    /**
+     * 注意这里AuthenticationManager和UserAccountService
+     * 是在SecurityConfiguration配置的，把俩个配置类关联了起来
+     */
     @Autowired
     AuthenticationManager authenticationManager;
+    @Autowired
+    private UserAccountService userAccountService;
+
     @Autowired
     RedisConnectionFactory redisConnectionFactory;
     @Autowired
@@ -58,6 +65,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         tokenEnhancerChain.setTokenEnhancers(Arrays.asList(tokenEnhancer(), accessTokenConverter()));
 
         endpoints.authenticationManager(authenticationManager)
+                .userDetailsService(userAccountService) //这里和SecurityConfiguration的userAccountService也可以不一样，为什么？
                 .tokenStore(tokenStore())
                 .tokenEnhancer(tokenEnhancerChain);
     }
@@ -67,23 +75,23 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
      */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-//        clients.jdbc(dataSource);
-//        clients.withClientDetails(oAuthClientDetailsService);
-        // 配置两个客户端,一个用于client认证
-        clients.inMemory()
-                .withClient("client_1")
-                .resourceIds(DEMO_RESOURCE_ID)
-                .authorizedGrantTypes("client_credentials", "refresh_token")
-                .scopes("select")
-                .authorities("client")
-                .secret("123456")
-                //用于password认证
-                .and().withClient("client_2")
-                .secret("123456")
-                .resourceIds(DEMO_RESOURCE_ID)
-                .authorizedGrantTypes("authorization_code", "code", "password", "refresh_token")
-                .scopes("select")
-                .redirectUris("www.baidu.com");
+        clients.jdbc(dataSource);
+        clients.withClientDetails(oAuthClientDetailsService);
+
+        // 这里将第三方客户端放到内存里，配置两个客户端,一个用于client认证
+//        clients.inMemory()
+//                .withClient("client_1")
+//                .resourceIds(DEMO_RESOURCE_ID)
+//                .authorizedGrantTypes("client_credentials", "refresh_token")
+//                .scopes("select")
+//                .authorities("client")
+//                .secret("123456")
+//                .and().withClient("client_2")
+//                .secret("123456")
+//                .resourceIds(DEMO_RESOURCE_ID)
+//                .authorizedGrantTypes("authorization_code", "code", "password", "refresh_token")
+//                .scopes("select")
+//                .redirectUris("http://www.baidu.com");
     }
 
     @Bean
@@ -99,8 +107,8 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     }
 
     @Bean
-    public RrJwtTokenEnhancer tokenEnhancer() {
-        return new RrJwtTokenEnhancer();
+    public JwtTokenEnhancer tokenEnhancer() {
+        return new JwtTokenEnhancer();
     }
 
 }

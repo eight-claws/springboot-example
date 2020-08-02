@@ -1,4 +1,4 @@
-package com.jun.sail.orderauth.service;
+package com.jun.sail.orderauth.oauth.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.ClientDetails;
@@ -8,12 +8,14 @@ import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
 
+/**
+ * 第三方客户端数据存储表
+ * 这里的表是使用默认的，可以覆盖修改此类，定义自己的表结构
+ */
 @Service
 public class OAuthClientDetailsService extends JdbcClientDetailsService {
 
-    /**
-     * 这里的表是使用默认的，可以覆盖修改此类，定义自己的表结构
-     */
+
     public OAuthClientDetailsService(DataSource dataSource) {
         super(dataSource);
     }
@@ -27,3 +29,5 @@ public class OAuthClientDetailsService extends JdbcClientDetailsService {
         return super.loadClientByClientId(clientId);
     }
 }
+
+

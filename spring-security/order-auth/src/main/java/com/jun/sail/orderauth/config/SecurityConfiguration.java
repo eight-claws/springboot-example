@@ -1,24 +1,25 @@
 package com.jun.sail.orderauth.config;
 
+import com.jun.sail.orderauth.oauth.service.UserAccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import java.util.Objects;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private UserAccountService userAccountService;
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
@@ -34,11 +35,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("user_1").password("123456").authorities("USER")
-                .and()
-                .withUser("user_2").password("123456").authorities("USER");
-   }
+        auth.authenticationProvider(authenticationProvider());
+
+        //把用户信息放到内存中
+//        auth.inMemoryAuthentication()
+//                .withUser("user_1").password("123456").authorities("USER")
+//                .and()
+//                .withUser("user_2").password("123456").authorities("USER");
+    }
 
     @Override
     @Bean
@@ -47,7 +51,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public PasswordEncoder oauthClientSecretEncoder() {
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setUserDetailsService(userAccountService);
+        daoAuthenticationProvider.setPasswordEncoder(oauthLoginPasswordEncoder());
+        return daoAuthenticationProvider;
+    }
+
+    @Override
+    protected UserDetailsService userDetailsService() {
+        return userAccountService;
+    }
+
+    @Bean
+    public PasswordEncoder oauthLoginPasswordEncoder() {
         return new PasswordEncoder() {
             @Override
             public String encode(CharSequence charSequence) {
@@ -56,7 +73,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
             @Override
             public boolean matches(CharSequence charSequence, String s) {
-                return Objects.equals(charSequence.toString(), s);
+                return !s.equals("userNotFoundPassword") && s.equals(charSequence.toString());
             }
         };
     }
