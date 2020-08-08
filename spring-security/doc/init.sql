@@ -17,7 +17,7 @@ CREATE TABLE T_USER_ACCOUNT
 COMMENT ON TABLE T_USER_ACCOUNT IS '用户表';
 
 insert into T_USER_ACCOUNT (EMAIL, PASSWORD, NICKNAME)
-value ('test@163.com', '123456', '小度音箱')
+values ('test@163.com', '123456', '小度音箱');
 
 
 CREATE TABLE T_OAUTH_CODE
@@ -55,7 +55,7 @@ insert into oauth_client_details
 authorities, web_server_redirect_uri)
 values ('client_2', 'openapi', '123456', 'select',
  'password,authorization_code,refresh_token', 'ROLE_CLIENT,ROLE_TRUSTED_CLIENT',
- 60, 'http://www.baidu.com');
+ 'http://www.baidu.com');
 
 
 
