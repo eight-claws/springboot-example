@@ -4,8 +4,10 @@
 
 ## Getting Started
 启动redis服务和postgres数据库服务，数据库脚本和初始化数据在[init.sql](./doc/init.sql)
+
 启动order-api资源服务和order-auth认证服务
 
+## How To Use
 授权码authorization code模式：
 1. 获取code
 
