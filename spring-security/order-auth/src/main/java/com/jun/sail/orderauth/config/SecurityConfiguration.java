@@ -11,9 +11,14 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * spring security的安全配置，和OAuth无关
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -23,14 +28,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().formLogin();
-//        http.requestMatchers()
-//                .antMatchers("/oauth/**")
-//                .and()
-//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                .and()
-//                .authorizeRequests() // 开启登录配置
-//                .anyRequest().authenticated(); // 其他接口登录之后就可以访问
+        http.csrf().disable();
+        // http.requestMatchers()
+        //         .antMatchers("/oauth/**")
+        //         .and()
+        //         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        //         .and()
+        //         .authorizeRequests() // 开启登录配置
+        //         .anyRequest().authenticated() // 其他接口登录之后就可以访问
+        //         .and();
+                // .addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class)
+                // .addFilterAt(dmAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
     }
 
     @Override

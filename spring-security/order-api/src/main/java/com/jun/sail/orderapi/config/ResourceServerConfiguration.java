@@ -49,11 +49,14 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     @Primary
     public DefaultTokenServices tokenServices() {
         DefaultTokenServices tokenServices = new DefaultTokenServices();
-        tokenServices.setSupportRefreshToken(true); // support refresh token
+        tokenServices.setSupportRefreshToken(true); // support refresh token，default false
         tokenServices.setTokenStore(tokenStore());
         return tokenServices;
     }
 
+    /**
+     * 这里的TokenStore保持和认证服务里的一致
+     */
     @Bean
     public TokenStore tokenStore() {
         return new JwtTokenStore(accessTokenConverter());

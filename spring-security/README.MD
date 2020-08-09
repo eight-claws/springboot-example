@@ -9,7 +9,7 @@
 
 ## How To Use
 
-授权码authorization code模式：
+### 授权码authorization code模式：
 1. 获取code
 
 	```
@@ -50,12 +50,23 @@
 	}
 	```
 3.然后访问资源服务：
-    
-    ```
-    GET http://localhost:8081/openApi/order/1
-    Accept: application/json
-    Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3VudHJ5IjoiY2hpbmEiLCJhdWQiOlsib3BlbmFwaSJdLCJ1c2VyX25hbWUiOiJzYWlsIiwic2NvcGUiOlsic2VsZWN0Il0sImV4cCI6MTU5NjM4MjAyMSwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdLCJqdGkiOiI4Nzk1ZWViZC1kYjNlLTQ0MTktYWI5MC0zZjA5MjZjYzRhNTYiLCJhZ2UiOjY3LCJjbGllbnRfaWQiOiJjbGllbnRfMiJ9.8AqmwEsCbPdFFCezRdmxMOPe3AuuEAl1_yq3AACZtYs
-    ```
+
+```
+GET http://localhost:8081/openApi/order/1
+Accept: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3VudHJ5IjoiY2hpbmEiLCJhdWQiOlsib3BlbmFwaSJdLCJ1c2VyX25hbWUiOiJzYWlsIiwic2NvcGUiOlsic2VsZWN0Il0sImV4cCI6MTU5NjM4MjAyMSwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdLCJqdGkiOiI4Nzk1ZWViZC1kYjNlLTQ0MTktYWI5MC0zZjA5MjZjYzRhNTYiLCJhZ2UiOjY3LCJjbGllbnRfaWQiOiJjbGllbnRfMiJ9.8AqmwEsCbPdFFCezRdmxMOPe3AuuEAl1_yq3AACZtY
+```
+
+### 刷新授权码
+	
+
+```
+POST http://localhost:8080/oauth/token?
+	client_id=client_2&
+	client_secret=123456&
+	grant_type=refresh_token&
+	refresh_token=refresh_token&
+```
 
 ## Doc
 [spring-security-oauth User Guide](https://projects.spring.io/spring-security-oauth/docs/oauth2.html)
