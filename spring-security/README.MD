@@ -1,13 +1,13 @@
-## About
+# About
 基于[spring-security-oauth](https://github.com/spring-projects/spring-security-oauth)实现OAUTH2.0
 为了尽量接近实际开发，认证服务和资源服务模块分开，用户和第三方客户端认证信息都放在数据库中
 
-## Getting Started
+# Getting Started
 启动redis服务和postgres数据库服务，数据库脚本和初始化数据在[init.sql](./doc/init.sql)
 
 启动order-api资源服务和order-auth认证服务
 
-## How To Use
+# How To Use
 
 ### 授权码authorization code模式：
 1. 获取code
@@ -50,12 +50,11 @@
 	}
 	```
 3.然后访问资源服务：
-
-```
-GET http://localhost:8081/openApi/order/1
-Accept: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3VudHJ5IjoiY2hpbmEiLCJhdWQiOlsib3BlbmFwaSJdLCJ1c2VyX25hbWUiOiJzYWlsIiwic2NvcGUiOlsic2VsZWN0Il0sImV4cCI6MTU5NjM4MjAyMSwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdLCJqdGkiOiI4Nzk1ZWViZC1kYjNlLTQ0MTktYWI5MC0zZjA5MjZjYzRhNTYiLCJhZ2UiOjY3LCJjbGllbnRfaWQiOiJjbGllbnRfMiJ9.8AqmwEsCbPdFFCezRdmxMOPe3AuuEAl1_yq3AACZtY
-```
+   ```
+    GET http://localhost:8081/openApi/order/1
+        Accept: application/json
+        Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3VudHJ5IjoiY2hpbmEiLCJhdWQiOlsib3BlbmFwaSJdLCJ1c2VyX25hbWUiOiJzYWlsIiwic2NvcGUiOlsic2VsZWN0Il0sImV4cCI6MTU5NjM4MjAyMSwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdLCJqdGkiOiI4Nzk1ZWViZC1kYjNlLTQ0MTktYWI5MC0zZjA5MjZjYzRhNTYiLCJhZ2UiOjY3LCJjbGllbnRfaWQiOiJjbGllbnRfMiJ9.8AqmwEsCbPdFFCezRdmxMOPe3AuuEAl1_yq3AACZtY
+   ```
 
 ### 刷新授权码
 	
@@ -65,7 +64,7 @@ POST http://localhost:8080/oauth/token?
 	client_id=client_2&
 	client_secret=123456&
 	grant_type=refresh_token&
-	refresh_token=refresh_token&
+	refresh_token=refresh_token
 ```
 
 ## Doc
