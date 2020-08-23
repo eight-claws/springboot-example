@@ -17,7 +17,7 @@ CREATE TABLE T_USER_ACCOUNT
 COMMENT ON TABLE T_USER_ACCOUNT IS '用户表';
 
 insert into T_USER_ACCOUNT (EMAIL, PASSWORD, NICKNAME)
-values ('test@163.com', '123456', '小度音箱');
+values ('test@163.com', '$2a$10$rvUpzCeY142DpM98EFn3teXEUjFhfwKtLDHMD5dPreNDqC9eSMPkC', '小度音箱');
 
 
 CREATE TABLE T_OAUTH_CODE

@@ -8,15 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/openApi")
-public class ProductEndpoints {
-
-    @GetMapping("/product/{id}")
-    public String getProduct(@PathVariable String id) {
-        //for debug
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return "product id : " + id;
-    }
+@RequestMapping("/openapi")
+public class OrderEndpoints {
 
     @GetMapping("/order/{id}")
     public String getOrder(@PathVariable String id) {

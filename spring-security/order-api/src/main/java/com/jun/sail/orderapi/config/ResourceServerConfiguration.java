@@ -3,12 +3,10 @@ package com.jun.sail.orderapi.config;
 import com.jun.sail.orderapi.config.props.OrderApiProperties;
 import com.jun.sail.orderapi.oauth.CustomAuthResponseExceptionTranslator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
@@ -21,7 +19,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @Configuration
 @EnableResourceServer
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
-    private static final String DEMO_RESOURCE_ID = "openapi";
+    private static final String SCOPE_OPEN_API = "openapi";
 
     @Autowired
     private OrderApiProperties orderApiProperties;
@@ -31,16 +29,20 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
         OAuth2AuthenticationEntryPoint authenticationEntryPoint = new OAuth2AuthenticationEntryPoint();
         authenticationEntryPoint.setExceptionTranslator(new CustomAuthResponseExceptionTranslator());
         resources.authenticationEntryPoint(authenticationEntryPoint)
-                .resourceId(DEMO_RESOURCE_ID)
+                .resourceId(SCOPE_OPEN_API)
                 .tokenServices(tokenServices()).stateless(true);
     }
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .anyRequest().authenticated();
-               // .antMatchers("/openapi/**").authenticated();
-//        http.exceptionHandling()
+        http.
+                // 我的理解是这里开启暴露/openapi的url
+                requestMatchers().antMatchers("/openapi/**")
+                .and()
+                .authorizeRequests()
+                // 这里配置/openapi开头的endpoints需要openapi的scope权限
+                .antMatchers("/openapi/**").access("#oauth2.hasScope('" + SCOPE_OPEN_API + "')");
+        //        http.exceptionHandling()
 //                .accessDeniedHandler(customAccessDeniedHandler)
 //                .authenticationEntryPoint(customAuthenticationEntryPoint);
     }

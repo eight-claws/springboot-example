@@ -12,12 +12,15 @@ import org.springframework.util.Base64Utils;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * 对应着 T_OAUTH_CODE表，存储code
+ */
 @Component
 public class AuthorizationCodeServices extends RandomValueAuthorizationCodeServices {
     @Autowired
     private OauthCodeMapper oauthCodeMapper;
 
-    private static final int AUTH_CODE_VALID_TIME = 1;//expired after 1 min
+    private static final int AUTH_CODE_VALID_TIME = 5;//expired after 5 min
 
     JdkSerializationRedisSerializer serializer = new JdkSerializationRedisSerializer();
 

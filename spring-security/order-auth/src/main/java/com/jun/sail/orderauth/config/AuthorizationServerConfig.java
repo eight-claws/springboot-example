@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -26,7 +28,7 @@ import java.util.Arrays;
 
 @Configuration
 @EnableAuthorizationServer
-public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
+public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
     private static final String DEMO_RESOURCE_ID = "openapi";
 
     @Autowired
@@ -46,15 +48,15 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     @Autowired
     RedisConnectionFactory redisConnectionFactory;
-    @Autowired
-    private PasswordEncoder oauthClientSecretEncoder;
+
     @Autowired
     private OAuthClientDetailsService oAuthClientDetailsService;
+
     @Autowired
     private DataSource dataSource;
 
     /**
-     * 配置客户端的信息，可以从内存中加载，也可以从数据库加载（更常用）
+     * 配置第三方客户端的信息，可以从内存中加载，也可以从数据库加载（更常用）
      */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
@@ -87,53 +89,63 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .realm("oauth2-resources")
                 .tokenKeyAccess("permitAll()")
                 .checkTokenAccess("isAuthenticated()")
-                .passwordEncoder(oauthClientSecretEncoder)
+                .passwordEncoder(clientPasswordEncoder())
                 .allowFormAuthenticationForClients();
     }
 
     /**
-     * 定义授权、token endpoint和token服务
-     * <p>
-     * 这里最重要的就是DefaultTokenServices提供随机数来返回access token和refresh token，
-     * 可自定义tokenEnhancer来改变token值，它会在token生成后/保存前调用
-     * <p>
+     * 第三方客户端使用加密方式
+     */
+    @Bean
+    public PasswordEncoder clientPasswordEncoder() {
+        // 不做加密处理，明文存储
+        return NoOpPasswordEncoder.getInstance();
+    }
+
+    /**
+     * 定义授权、token endpoint和token服务，即如何生成token和token存储在哪里（内存/数据库/JWT）
      *
-     *
+     * <p>
+     * 这里最重要的就是DefaultTokenServices，默认是生成随机值作为token
+     * <p>
      */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
-        // 这里设置了两个TokenEnhancer
+        // 这里设置了两个TokenEnhancer，可改变token值，它会在token生成后/保存前调用
         TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
         tokenEnhancerChain.setTokenEnhancers(Arrays.asList(tokenEnhancer(), accessTokenConverter()));
 
-        endpoints.authenticationManager(authenticationManager)// 注入authenticationManager开启密码授权模式
+        endpoints.authenticationManager(authenticationManager) // 注入authenticationManager开启密码授权模式
                 // 必须要配置userDetailsService，才支持refresh token grant，to ensure that the account is still active
                 // 这里和SecurityConfiguration的userAccountService也可以不一样，为什么？
                 .userDetailsService(userAccountService)
-                .authorizationCodeServices(authorizationCodeServices)// 定义authorizationCodeServices支持auth code grant.
+                .authorizationCodeServices(authorizationCodeServices) // 定义authorizationCodeServices支持auth code grant.
                 .tokenStore(tokenStore())
                 .tokenEnhancer(tokenEnhancerChain);
     }
 
-    /**
-     * 改变token的值，如添加自定义信息
-     */
-    @Bean
-    public JwtTokenEnhancer tokenEnhancer() {
-        return new JwtTokenEnhancer();
-    }
 
     /**
-     * JWT提供的，帮助把OAuth认证信息转为JWT，即access_token,它返回的很多默认字段（jti,ati)都是在这里定义的
-     * 注意它本身也是一个TokenEnhancer
+     * TokenEnhancer
      *
-     * 这里使用的密钥也要定义在资源服务里，以便资源服务也可以校验token
+     * JWT提供的，帮助把OAuth认证信息转为JWT，即access_token,它返回的很多默认字段（jti,ati)都是在这里定义的
      */
     @Bean
     public JwtAccessTokenConverter accessTokenConverter() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        // 这里使用的密钥也要定义在资源服务里，以便资源服务也可以校验token，否则认证服务就要提供校验token的接口给资源服务
         converter.setSigningKey(orderAuthProperties.getOauthJwtSecret());
         return converter;
+    }
+
+    /**
+     * TokenEnhancer
+     *
+     * 向token里添加自定义信息
+     */
+    @Bean
+    public JwtTokenEnhancer tokenEnhancer() {
+        return new JwtTokenEnhancer();
     }
 
 

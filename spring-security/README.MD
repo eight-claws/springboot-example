@@ -1,5 +1,5 @@
 # About
-基于[spring-security-oauth](https://github.com/spring-projects/spring-security-oauth)实现OAUTH2.0
+基于[spring-security-oauth](https://github.com/spring-projects/spring-security-oauth)实现OAuth2.0
 为了尽量接近实际开发，认证服务和资源服务模块分开，用户和第三方客户端认证信息都放在数据库中
 
 # Getting Started
@@ -17,7 +17,7 @@
 	response_type=code
 	&client_id=client_2
 	&redirect_uri=http://www.baidu.com
-	&scope=select
+	&scope=openapi
 	```
 	跳转到登录页面，输入用户名密码 test@163.com 123456,点击允许授权后，会再次跳转到redirect_uri指定的网址并返回code
 	
