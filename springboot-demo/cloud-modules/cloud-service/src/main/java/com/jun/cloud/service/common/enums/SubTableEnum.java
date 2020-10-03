@@ -1,8 +1,8 @@
 package com.jun.cloud.service.common.enums;
 
 /**
- *
  * 用于记录需要分表的表名和字段
+ *
  * @author Jun
  * 创建时间： 2019/7/7
  */
@@ -17,16 +17,16 @@ public enum SubTableEnum {
     private String subCol;
 
 
-    SubTableEnum(String tableName, String subCol){
+    SubTableEnum(String tableName, String subCol) {
         this.tableName = tableName;
         this.subCol = subCol;
     }
 
-    public String getTableName(){
+    public String getTableName() {
         return tableName;
     }
 
-    public String getSubCol(){
+    public String getSubCol() {
         return subCol;
     }
 

@@ -18,9 +18,9 @@ import java.util.concurrent.ThreadPoolExecutor;
  */
 @Configuration
 @EnableAsync
-public class ThreadPoolConfig  implements AsyncConfigurer {
+public class ThreadPoolConfig implements AsyncConfigurer {
 
-    private static final Logger logger  = LoggerFactory.getLogger(ThreadPoolConfig.class);
+    private static final Logger logger = LoggerFactory.getLogger(ThreadPoolConfig.class);
 
     @Value("${thread.pool.executor.core_pool_size:10}")
     private int corePoolSize;
@@ -68,7 +68,7 @@ public class ThreadPoolConfig  implements AsyncConfigurer {
         pool.setTaskDecorator(runnable -> () -> {
             try {
                 runnable.run();
-            }catch (Exception e) {
+            } catch (Exception e) {
                 logger.error("- thread error", e);
             }
         });
@@ -79,7 +79,7 @@ public class ThreadPoolConfig  implements AsyncConfigurer {
 
     @Override
     public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
-        return (Throwable throwable, Method method, Object... objects)->{
+        return (Throwable throwable, Method method, Object... objects) -> {
             logger.error("- taskExecutor execute error,", throwable);
             logger.error("- uncaught exception,method:{},param:{}", method, objects);
         };

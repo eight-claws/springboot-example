@@ -30,6 +30,7 @@ import java.util.List;
 public class Swagger2Config implements WebMvcConfigurer {
 
     private static List<ResponseMessage> responseMessageList = new ArrayList<>();
+
     static {
         responseMessageList.add(new ResponseMessageBuilder().code(401).message("Unauthorized").build());
         responseMessageList.add(new ResponseMessageBuilder().code(403).message("Forbidden").build());

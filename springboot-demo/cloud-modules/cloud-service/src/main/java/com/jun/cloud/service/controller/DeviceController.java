@@ -33,13 +33,13 @@ public class DeviceController {
     private IDeviceService deviceService;
 
     @GetMapping("/pageQuery")
-    public BaseResponse<PageData<DeviceListDto>> queryDevicePage(@Validated DeviceQueryDto queryDto){
+    public BaseResponse<PageData<DeviceListDto>> queryDevicePage(@Validated DeviceQueryDto queryDto) {
         BaseResponse<PageData<DeviceListDto>> response = new BaseResponse<>();
         PageData<DeviceListDto> pageData = deviceService.queryConsume(queryDto);
         response.setData(pageData);
         Integer b = 2;
         List<DeviceQueryDto> arr = new ArrayList<>();
-        while(b ==2){
+        while (b == 2) {
             arr.add(new DeviceQueryDto());
             System.out.println(arr.size());
         }

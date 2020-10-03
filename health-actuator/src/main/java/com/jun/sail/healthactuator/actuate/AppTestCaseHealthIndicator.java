@@ -9,6 +9,6 @@ public class AppTestCaseHealthIndicator extends AbstractHealthIndicator {
 
     @Override
     protected void doHealthCheck(Health.Builder builder) throws Exception {
-       builder.up().withDetail("result", "132ms");
+        builder.up().withDetail("result", "132ms");
     }
 }

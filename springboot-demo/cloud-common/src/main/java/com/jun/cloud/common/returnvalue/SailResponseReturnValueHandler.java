@@ -31,7 +31,7 @@ public class SailResponseReturnValueHandler implements HandlerMethodReturnValueH
     @Override
     public boolean supportsReturnType(MethodParameter returnType) {
         return returnType.getContainingClass().isAnnotationPresent(RestController.class)
-            && returnType.hasMethodAnnotation(SailResponse.class);
+                && returnType.hasMethodAnnotation(SailResponse.class);
     }
 
     @Override

@@ -22,7 +22,7 @@ public class EventListenerDemo {
     private HashMap<String, String> typeMap;
 
     @EventListener(classes = ApplicationReadyEvent.class)
-    public void processInit(){
+    public void processInit() {
 
         log.info(AppStartConstant.LOG_SPARATOR + "[ listener ApplicationReadyEvent ]");
     }
@@ -30,11 +30,11 @@ public class EventListenerDemo {
 
     /**
      * 用来在属性注入后执行一些初始化方法，没有返回值和参数
-     *
+     * <p>
      * 可以用来初始化一些OSSClient连接对象，或者初始化常量map等
      */
     @PostConstruct
-    public void init(){
+    public void init() {
         log.info(AppStartConstant.LOG_SPARATOR + "[ PostConstruct ]");
 
         typeMap = new HashMap<>();

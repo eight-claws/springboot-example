@@ -87,7 +87,7 @@ public class CsrfHostFilter implements Filter {
             }
             if (!legalIps.contains(referer)) {
                 // 不同域请求 视为非法
-                log.error( "found csrf request ", "referer", referer);
+                log.error("found csrf request ", "referer", referer);
                 httpServletResponse.sendError(HttpStatus.FORBIDDEN.value(), "illegal request");
                 return;
             }

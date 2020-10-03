@@ -8,7 +8,7 @@ import io.swagger.annotations.ApiModelProperty;
  * 创建时间： 2019/12/14
  */
 @ApiModel(description = "分页数据返回内容")
-public class PageData extends ListData{
+public class PageData extends ListData {
 
     @ApiModelProperty(value = "当前页码")
     private Integer pageNo;

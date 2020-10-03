@@ -17,7 +17,7 @@ import java.util.List;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author 余生君
@@ -31,7 +31,7 @@ public class RegionServiceImpl extends ServiceImpl<RegionMapper, Region> impleme
      * 在定义的sql中使用mybatis的wrapper条件
      */
     @Override
-    public List<RegionInfoDto> selectRegionInfoList(@Param(Constants.WRAPPER) Wrapper wrapper){
+    public List<RegionInfoDto> selectRegionInfoList(@Param(Constants.WRAPPER) Wrapper wrapper) {
         return baseMapper.selectRegionInfos(wrapper);
     }
 
@@ -52,7 +52,7 @@ public class RegionServiceImpl extends ServiceImpl<RegionMapper, Region> impleme
 
         PageData<RegionInfoDto> pageDto = new PageData<>();
         pageDto.setPageNo((int) regionPage.getCurrent());
-        pageDto.setPageSize((int)regionPage.getSize());
+        pageDto.setPageSize((int) regionPage.getSize());
         pageDto.setTotal(regionPage.getTotal());
         pageDto.setList(regionPage.getRecords());
 

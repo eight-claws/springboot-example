@@ -17,7 +17,7 @@ public class RedisConfig {
     private DataProperties dataProperties;
 
     @Bean
-    public String tet(){
+    public String tet() {
         dataProperties.getUser().getCountryCode();
         return "rt";
     }

@@ -33,7 +33,7 @@ public class UserController {
 
     @GetMapping("/testLog")
     @ApiOperation(value = "用来触发请求，测试logger级别")
-    public BaseResponse testlogger( ) {
+    public BaseResponse testlogger() {
         BaseResponse<String> response = new BaseResponse<>();
         log.trace("======trace");
         log.debug("======debug");
@@ -51,7 +51,7 @@ public class UserController {
      */
     @GetMapping("/export")
     @ApiOperation(value = "导出人员列表csv文件")
-    public void exportUser(HttpServletResponse response){
+    public void exportUser(HttpServletResponse response) {
         String csvName = "userConsumeRecord";
         //从数据库获取countGroupDtoList集合
         List<CountGroupDto> countGroupDtoList = geCountGroupDtoList();
@@ -63,7 +63,7 @@ public class UserController {
     }
 
 
-    private List<CountGroupDto> geCountGroupDtoList(){
+    private List<CountGroupDto> geCountGroupDtoList() {
         List<CountGroupDto> countGroupDtoList = new ArrayList<>();
         CountGroupDto countGroupDto;
         for (int i = 0; i < 10; i++) {

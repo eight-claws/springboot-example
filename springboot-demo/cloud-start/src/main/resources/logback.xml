@@ -9,19 +9,16 @@
     <contextName>springmvc-demo</contextName>
 
 
-
     <!--用来定义变量值，它有两个属性name: 变量的名称,value: 变量定义的值，定义的值会被插入到logger上下文中，可以使用“${}”来使用变量。 -->
-<!--    <property name="LOG_HOME" value="${catalina.base}/logs/${contextName}/" />-->
-    <property name="APP_NAME" value="springmvc-demo/" />
-    <property name="LOG_HOME" value="d://logs/${APP_NAME}" />
+    <!--    <property name="LOG_HOME" value="${catalina.base}/logs/${contextName}/" />-->
+    <property name="APP_NAME" value="springmvc-demo/"/>
+    <property name="LOG_HOME" value="d://logs/${APP_NAME}"/>
 
 
     <!--获取时间戳字符串，他有两个属性key和datePattern。  key: 标识此<timestamp> 的名字；datePattern:
     设置将当前时间（解析配置文件的时间）转换为字符串的模式，遵循java.txt.SimpleDateFormat的格式。
     这个属性很少使用-->
-    <timestamp key="keyValue" datePattern="yyyy-MM-dd" />
-
-
+    <timestamp key="keyValue" datePattern="yyyy-MM-dd"/>
 
 
     <!--日志级别及输出格式的配置-->
@@ -55,7 +52,6 @@
     </appender>
 
 
-
     <!--
     logger,有三个属性。另外需要指定appender-ref
     name: 用来指定受此logger约束的某一个包或者具体的某一个类
@@ -69,11 +65,8 @@
 
     <!-- 默认日志输出级别 -->
     <root level="info">
-        <appender-ref ref="STDOUT" />
+        <appender-ref ref="STDOUT"/>
     </root>
-
-
-
 
 
 </configuration>

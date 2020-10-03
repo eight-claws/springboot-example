@@ -63,7 +63,7 @@ public class SubTableServiceImpl {
     private final static String PLACEHOLDER_TABLE_NAME = "#table-name#";
 
 
-    public void subTableForMonth(SubTableEnum subTableEnum){
+    public void subTableForMonth(SubTableEnum subTableEnum) {
 
     }
 
@@ -71,7 +71,7 @@ public class SubTableServiceImpl {
      * 执行分表的入口
      * 为方便维护，每张表的后缀都是每周一
      */
-    public void subTableForWeek(SubTableEnum subTableEnum){
+    public void subTableForWeek(SubTableEnum subTableEnum) {
         LocalDate currentMonday = LocalDate.now().with(DayOfWeek.MONDAY);
 
         logger.info("[sub table] start check {} subTable ", subTableEnum.getTableName());
@@ -131,7 +131,7 @@ public class SubTableServiceImpl {
     /***
      * 获取最新的分表日期
      */
-    private LocalDate getLastSubTableDate(String tableName){
+    private LocalDate getLastSubTableDate(String tableName) {
         String sql = SELECT_TEMPLATE.replace(PLACEHOLDER_TABLE_NAME, tableName);
 
         String lastSubTableName = subTableMapper.findBySql(sql);

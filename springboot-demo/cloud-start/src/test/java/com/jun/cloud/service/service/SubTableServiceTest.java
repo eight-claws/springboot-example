@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * 测试分表
+ *
  * @author Jun
  * 创建时间： 2019/7/7
  */
@@ -22,7 +23,7 @@ public class SubTableServiceTest {
     private SubTableServiceImpl subTableService;
 
     @Test
-    public void testSubTableForWeek(){
+    public void testSubTableForWeek() {
         subTableService.subTableForWeek(SubTableEnum.TB_REGION);
     }
 

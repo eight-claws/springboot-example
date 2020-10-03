@@ -14,33 +14,33 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = EnumCheckValidator.class)
 public @interface EnumCheck {
 
-        /**
-         * 是否必填 默认是必填的
-         */
-        boolean required() default true;
+    /**
+     * 是否必填 默认是必填的
+     */
+    boolean required() default true;
 
-        /**
-         * 验证失败的消息
-         */
-        String message() default "枚举验证失败";
+    /**
+     * 验证失败的消息
+     */
+    String message() default "枚举验证失败";
 
-        /**
-         * 分组的内容
-         */
-        Class<?>[] groups() default {};
-    
-        /**
-         * 错误验证的级别
-         */
-        Class<? extends Payload>[] payload() default {};
-    
-        /**
-         * 枚举的Class
-         */
-        Class<? extends Enum<?>> enumClass();
-    
-        /**
-         * 枚举中的验证方法
-         */
-        String enumMethod() default RestfulConstants.ENUM_CHECK_METHOD_NAME;
+    /**
+     * 分组的内容
+     */
+    Class<?>[] groups() default {};
+
+    /**
+     * 错误验证的级别
+     */
+    Class<? extends Payload>[] payload() default {};
+
+    /**
+     * 枚举的Class
+     */
+    Class<? extends Enum<?>> enumClass();
+
+    /**
+     * 枚举中的验证方法
+     */
+    String enumMethod() default RestfulConstants.ENUM_CHECK_METHOD_NAME;
 }

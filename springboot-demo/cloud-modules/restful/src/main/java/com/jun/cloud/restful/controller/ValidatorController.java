@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 
 /**
  * 参数校验
+ *
  * @author 94977
  * @create 2019/1/1
  */
@@ -63,7 +64,7 @@ public class ValidatorController {
     }
 
     @InitBinder
-    public void initBinder(WebDataBinder binder){
+    public void initBinder(WebDataBinder binder) {
         CustomDateEditor editor = new CustomDateEditor(new SimpleDateFormat("yyyyMMdd"), true);
         binder.registerCustomEditor(Data.class, editor);
     }

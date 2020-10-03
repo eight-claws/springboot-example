@@ -7,11 +7,11 @@ import java.io.IOException;
 /**
  * 将相关信息保存在RequestContextUtil里面
  * 1.保存当前request和response，以便在Controller和service层代码直接拿到请求和返回信息
- *   使用方式如：HttpServletRequest request = RequestContextUtil.getRequest()
- *
+ * 使用方式如：HttpServletRequest request = RequestContextUtil.getRequest()
+ * <p>
  * 2.保存登录用户的session信息及多语言标识的处理
- *   使用方式如：UserSession userSession = RequestContextUtil.getUserSession()
- *              Local userLocal = RequestContextUtil.getLocale()
+ * 使用方式如：UserSession userSession = RequestContextUtil.getUserSession()
+ * Local userLocal = RequestContextUtil.getLocale()
  */
 public class RequestContextFilter implements Filter {
 

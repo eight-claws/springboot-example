@@ -4,16 +4,16 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.jun.cloud.service.entity.Device">
-        <id column="id" property="id" />
-        <result column="name" property="name" />
-        <result column="region_code" property="regionCode" />
-        <result column="region_path" property="regionPath" />
-        <result column="treaty_type" property="treatyType" />
-        <result column="ip" property="ip" />
-        <result column="port" property="port" />
-        <result column="delete_status" property="deleteStatus" />
-        <result column="create_time" property="createTime" />
-        <result column="update_time" property="updateTime" />
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="region_code" property="regionCode"/>
+        <result column="region_path" property="regionPath"/>
+        <result column="treaty_type" property="treatyType"/>
+        <result column="ip" property="ip"/>
+        <result column="port" property="port"/>
+        <result column="delete_status" property="deleteStatus"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
     </resultMap>
 
 
@@ -31,7 +31,7 @@
         WHERE
         d.region_code = #{queryDto.regionCode}
         <if test="queryDto.deviceName != null and queryDto.deviceName != ''">
-            and d.name like CONCAT('%',#{queryDto.deviceName},'%')  ESCAPE '/'
+            and d.name like CONCAT('%',#{queryDto.deviceName},'%') ESCAPE '/'
         </if>
 
         <if test="queryDto.treatyType != null and queryDto.treatyType != ''">
@@ -43,13 +43,13 @@
 
     <select id="countDevicePage" resultType="java.lang.Long">
         SELECT
-       count(*)
+        count(*)
         FROM
         device d
         WHERE
         d.region_code = #{queryDto.regionCode}
         <if test="queryDto.deviceName != null and queryDto.deviceName != ''">
-            and d.name like CONCAT('%',#{queryDto.deviceName},'%')  ESCAPE '/'
+            and d.name like CONCAT('%',#{queryDto.deviceName},'%') ESCAPE '/'
         </if>
 
         <if test="queryDto.treatyType != null and queryDto.treatyType != ''">

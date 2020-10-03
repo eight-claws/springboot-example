@@ -27,7 +27,7 @@ public class DeviceServiceTest {
     private IRegionService regionService;
 
     @Test
-    public void testDeviceSave(){
+    public void testDeviceSave() {
         Device device = new Device();
         device.setCreateTime(LocalDateTime.now())
                 .setUpdateTime(LocalDateTime.now())
@@ -38,7 +38,7 @@ public class DeviceServiceTest {
     }
 
     @Test
-    public void testRegionSave(){
+    public void testRegionSave() {
         //Region region = new Region()
         //        .setId(UuidUtil.getUuid())
         //        .setCode(UuidUtil.getUuid())

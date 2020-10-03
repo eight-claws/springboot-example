@@ -24,7 +24,7 @@ public class GlobalResponseAdvice implements ResponseBodyAdvice {
     public boolean supports(MethodParameter returnType, Class converterType) {
         //仅处理返回类型为BaseResponse的方法
         Method method = returnType.getMethod();
-        if(method != null){
+        if (method != null) {
             return method.getReturnType().isAssignableFrom(BaseResponse.class);
         }
         return false;
@@ -32,13 +32,13 @@ public class GlobalResponseAdvice implements ResponseBodyAdvice {
 
     @Override
     public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
-        if(body instanceof BaseResponse){
-            BaseResponse resp = (BaseResponse)body;
+        if (body instanceof BaseResponse) {
+            BaseResponse resp = (BaseResponse) body;
             //resp.setCode(ResponseUtil.formatErrorCode(resp.getCode()));
             //判断是否包含替换符，防止用户已经进行多语言处理或者统一异常已经处理过之后，再次处理导致参数未能替换
             //String msg = ResponseUtil.i18Format(resp.getCode(),resp.getMsg(),null);
             String msg = resp.getMsg();
-            if(!StringUtils.isEmpty(msg) && !isMatches(msg)){
+            if (!StringUtils.isEmpty(msg) && !isMatches(msg)) {
                 //resp.setMsg(msg);
                 resp.setMsg(msg);
             }
@@ -48,6 +48,7 @@ public class GlobalResponseAdvice implements ResponseBodyAdvice {
     }
 
     private static final String DEFAULT_QUERY_REGEX = "[{}]";
+
     private boolean isMatches(String msg) {
         Pattern pattern = Pattern.compile(DEFAULT_QUERY_REGEX);
         Matcher matcher = pattern.matcher(msg);

@@ -16,7 +16,7 @@ public class InterceptorDemo extends HandlerInterceptorAdapter {
     }
 
     @Override
-    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView)  {
+    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) {
         //System.out.println("拦截器1 postHandle： ");
     }
 

@@ -19,12 +19,11 @@ public class PersonDto {
 
     private Integer height;
 
-    public PersonDto(String name, Integer age, Integer height){
+    public PersonDto(String name, Integer age, Integer height) {
         this.name = name;
         this.age = age;
         this.height = height;
     }
-
 
 
 }

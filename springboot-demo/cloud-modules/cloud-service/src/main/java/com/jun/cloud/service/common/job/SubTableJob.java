@@ -13,6 +13,4 @@ public class SubTableJob {
     private IQuartzService quartzService;
 
 
-
-
 }

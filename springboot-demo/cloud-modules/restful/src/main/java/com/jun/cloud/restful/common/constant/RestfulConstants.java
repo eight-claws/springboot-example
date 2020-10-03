@@ -2,6 +2,7 @@ package com.jun.cloud.restful.common.constant;
 
 /**
  * 常量类
+ *
  * @author Jun
  * 创建时间： 2019/5/12
  */

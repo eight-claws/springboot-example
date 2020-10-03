@@ -14,7 +14,7 @@
     <version>1.0.0</version>
 
     <packaging>jar</packaging>
-    
+
     <name>app-start</name>
     <description>学习程序启动后，执行一些初始化任务</description>
 

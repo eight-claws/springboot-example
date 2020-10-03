@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -127,7 +126,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     /**
      * TokenEnhancer
-     *
+     * <p>
      * JWT提供的，帮助把OAuth认证信息转为JWT，即access_token,它返回的很多默认字段（jti,ati)都是在这里定义的
      */
     @Bean
@@ -140,7 +139,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     /**
      * TokenEnhancer
-     *
+     * <p>
      * 向token里添加自定义信息
      */
     @Bean
@@ -152,7 +151,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     /**
      * 定义token的存储方式：可以放在redis/数据库（oauth_access_token表）/内存，或者jwt中
      * 这里放在JWT里，根本就不必后端存储token了，这是JWT很大的优势
-     *
+     * <p>
      * 但是JWT也有缺点，1.不容易撤销授权，所以一般令牌时效性很短，撤销授权可以在刷新时实现，怎么实现？
      * 2.如果要存储的信息很多，令牌会变得很大
      */

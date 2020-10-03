@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @Accessors(chain = true)
 public class Device implements Serializable {
 
-private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     /**
      * 主键，使用32位UUID

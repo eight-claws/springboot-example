@@ -23,7 +23,6 @@ public class TestServiceImpl implements ITestService {
     private static final Logger logger = LoggerFactory.getLogger(TestServiceImpl.class);
 
 
-
     /**
      * 演示使用restTemplate调用接口
      *

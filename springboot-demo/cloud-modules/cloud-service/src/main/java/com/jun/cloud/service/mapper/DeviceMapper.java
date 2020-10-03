@@ -18,8 +18,8 @@ import java.util.List;
  */
 public interface DeviceMapper extends BaseMapper<Device> {
 
-    List<DeviceListDto> queryDevicePage(@Param("queryDto")DeviceQueryDto queryDto);
+    List<DeviceListDto> queryDevicePage(@Param("queryDto") DeviceQueryDto queryDto);
 
-    Long countDevicePage(@Param("queryDto")DeviceQueryDto queryDto);
+    Long countDevicePage(@Param("queryDto") DeviceQueryDto queryDto);
 
 }

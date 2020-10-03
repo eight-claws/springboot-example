@@ -11,10 +11,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
@@ -32,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.requestMatchers().antMatchers("/oauth/**", "/login/**") //将指定的这些URL请求开启
                 .and()
-                .authorizeRequests().anyRequest().authenticated() // 这里配置其他请求，任何验证过的用户都有权限访问
+                .authorizeRequests().anyRequest().authenticated() // 这里配置其他端点，任何验证过的用户都有权限访问
                 .and()
                 .formLogin().permitAll(); //新增login form支持用户登录及授权
 

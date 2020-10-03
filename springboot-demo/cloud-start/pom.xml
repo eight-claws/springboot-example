@@ -29,7 +29,7 @@
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <!--添加此依赖后还是springboot的main启动，此处就应该是compile即运行时也需要，
             否则idea会报NoClassDefFoundError: javax/servlet/ServletContext错误-->
-        <!--<scope>provided</scope>-->
+            <!--<scope>provided</scope>-->
         </dependency>
 
         <!--spring的热部署，注意要修改idea配置complie的自动编译-->
@@ -51,7 +51,6 @@
     </dependencies>
 
 
-
     <build>
         <!--指定生成war包的名称-->
         <finalName>cloudStart</finalName>
@@ -67,21 +66,21 @@
             </plugin>
 
             <!--这个依赖要在start工程中，会去寻找main方法，repackage成cloudStart.war.original-->
-<!--            <plugin>-->
-<!--                <groupId>org.springframework.boot</groupId>-->
-<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--                &lt;!&ndash;<executions>&ndash;&gt;-->
-<!--                &lt;!&ndash;<execution>&ndash;&gt;-->
-<!--                &lt;!&ndash;<goals>&ndash;&gt;-->
-<!--                &lt;!&ndash;<goal>repackage</goal>&ndash;&gt;-->
-<!--                &lt;!&ndash;</goals>&ndash;&gt;-->
-<!--                &lt;!&ndash;</execution>&ndash;&gt;-->
-<!--                &lt;!&ndash;</executions>&ndash;&gt;-->
-<!--                <configuration>-->
-<!--                    <executable>true</executable>-->
-<!--                    <fork>true</fork>&lt;!&ndash; 如果没有该配置，热部署的devtools不生效 &ndash;&gt;-->
-<!--                </configuration>-->
-<!--            </plugin>-->
+            <!--            <plugin>-->
+            <!--                <groupId>org.springframework.boot</groupId>-->
+            <!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+            <!--                &lt;!&ndash;<executions>&ndash;&gt;-->
+            <!--                &lt;!&ndash;<execution>&ndash;&gt;-->
+            <!--                &lt;!&ndash;<goals>&ndash;&gt;-->
+            <!--                &lt;!&ndash;<goal>repackage</goal>&ndash;&gt;-->
+            <!--                &lt;!&ndash;</goals>&ndash;&gt;-->
+            <!--                &lt;!&ndash;</execution>&ndash;&gt;-->
+            <!--                &lt;!&ndash;</executions>&ndash;&gt;-->
+            <!--                <configuration>-->
+            <!--                    <executable>true</executable>-->
+            <!--                    <fork>true</fork>&lt;!&ndash; 如果没有该配置，热部署的devtools不生效 &ndash;&gt;-->
+            <!--                </configuration>-->
+            <!--            </plugin>-->
         </plugins>
 
         <resources>

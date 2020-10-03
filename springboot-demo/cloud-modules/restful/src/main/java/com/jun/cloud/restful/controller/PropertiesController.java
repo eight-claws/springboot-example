@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@ConfigurationProperties(prefix="person")
+@ConfigurationProperties(prefix = "person")
 @RestController
 @Api(tags = "自定义属性properties获取测试")
 @RequestMapping("/person")
@@ -30,10 +30,10 @@ public class PropertiesController {
     private Integer height;
 
     @GetMapping("/get")
-    @ApiOperation(value = "测试自定义属性properties获取",notes = "返回person对象")
-    public BaseResponse<PersonDto> getPerson(){
+    @ApiOperation(value = "测试自定义属性properties获取", notes = "返回person对象")
+    public BaseResponse<PersonDto> getPerson() {
         BaseResponse<PersonDto> response = new BaseResponse<>();
-        PersonDto personDto = new PersonDto(name, age, birthday,height);
+        PersonDto personDto = new PersonDto(name, age, birthday, height);
         response.setData(personDto);
         return response;
     }
@@ -41,14 +41,15 @@ public class PropertiesController {
 
     /**
      * 注意：使用@ConfigurationProperties必须为属性提供set方法，而Value就不必。
+     *
      * @param name name
      */
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
 
     }
 
-    public void setAge(Integer age){
+    public void setAge(Integer age) {
         this.age = age;
     }
 

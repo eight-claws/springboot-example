@@ -9,6 +9,4 @@ public interface AppStartConstant {
     String LOG_SPARATOR = "============== ";
 
 
-
-
 }

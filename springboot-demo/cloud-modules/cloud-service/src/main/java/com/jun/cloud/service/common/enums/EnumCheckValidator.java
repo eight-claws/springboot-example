@@ -15,7 +15,7 @@ public class EnumCheckValidator implements ConstraintValidator<EnumCheck, Object
 
     @Override
     public void initialize(EnumCheck enumCheck) {
-        this.enumCheck =enumCheck;
+        this.enumCheck = enumCheck;
     }
 
     @Override
@@ -30,8 +30,8 @@ public class EnumCheckValidator implements ConstraintValidator<EnumCheck, Object
         Class<?> valueClass = value.getClass();
         try {
             Method method = this.enumCheck.enumClass().getMethod(this.enumCheck.enumMethod(), valueClass);
-            result = (Boolean)method.invoke(null, value);
-            if(result == null){
+            result = (Boolean) method.invoke(null, value);
+            if (result == null) {
                 return false;
             }
         } catch (Exception e) {

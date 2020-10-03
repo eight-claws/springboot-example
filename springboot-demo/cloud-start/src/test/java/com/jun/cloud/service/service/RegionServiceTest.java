@@ -20,6 +20,7 @@ import java.util.List;
 
 /**
  * 测试实体属性相关
+ *
  * @author Jun
  * 创建时间： 2019/6/18
  */
@@ -37,7 +38,7 @@ public class RegionServiceTest {
      * 测试枚举属性的插入，查询
      */
     @Test
-    public void testRegionSave(){
+    public void testRegionSave() {
         //String regionId = UuidUtil.getUuid();
         //Region region = createTempRegion()
         //        .setId(regionId)
@@ -55,7 +56,7 @@ public class RegionServiceTest {
      * 测试逻辑删除属性
      */
     @Test
-    public void testRegionDel(){
+    public void testRegionDel() {
         String regionId = UuidUtil.getUuid();
         Region region = createTempRegion()
                 .setId(regionId);
@@ -71,7 +72,7 @@ public class RegionServiceTest {
      * 测试主键类型为mybatis-plus来生成uuid
      */
     @Test
-    public void testRegionIDType(){
+    public void testRegionIDType() {
         Region region = createTempRegion()
                 .setId(null);
 
@@ -87,7 +88,7 @@ public class RegionServiceTest {
      * 测试UpdateWrapper 必须有set
      */
     @Test
-    public void testRegionUpdateWrapper(){
+    public void testRegionUpdateWrapper() {
         //UpdateWrapper<Region> wrapper = new UpdateWrapper<>();
         ////修改的where条件
         //wrapper.eq("type", RegionTypeEnum.REGION_NORMAL);
@@ -104,7 +105,7 @@ public class RegionServiceTest {
      * 测试自定义sql使用Wrapper
      */
     @Test
-    public void testRegionCustomeWrapper(){
+    public void testRegionCustomeWrapper() {
         //QueryWrapper<Region> queryWrapper = new QueryWrapper<Region>().eq("parent_code", "root000000");
         //
         //List<RegionInfoDto> regionInfoDtoList = regionService.selectRegionInfoList(queryWrapper);
@@ -116,7 +117,7 @@ public class RegionServiceTest {
      * 测试分页
      */
     @Test
-    public void testRegionPageQuery(){
+    public void testRegionPageQuery() {
         RegionQueryDto queryDto = new RegionQueryDto();
         queryDto.setParentCode("root000000");
 
@@ -125,11 +126,10 @@ public class RegionServiceTest {
     }
 
 
-
     /**
      * 创建一个临时区域对象，获取后可以覆盖想要修改的属性
      */
-    private Region createTempRegion(){
+    private Region createTempRegion() {
         //String regionCode = UuidUtil.getUuid();
         //
         //Region region = new Region()
@@ -147,7 +147,6 @@ public class RegionServiceTest {
         //return region;
         return null;
     }
-
 
 
 }

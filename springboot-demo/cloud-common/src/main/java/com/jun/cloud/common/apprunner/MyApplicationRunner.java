@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Slf4j
-public class MyApplicationRunner implements ApplicationRunner{
+public class MyApplicationRunner implements ApplicationRunner {
 
     /**
      * 这里可以做些定时任务的初始化、检测其他组件是否启动等··
@@ -22,7 +22,7 @@ public class MyApplicationRunner implements ApplicationRunner{
         try {
             //System.out.println(args);
             //System.out.println("-----演示CommandLineRunner和ApplicationRunner");
-        }catch (Exception e){
+        } catch (Exception e) {
             log.error("app runner task error!");
         }
     }

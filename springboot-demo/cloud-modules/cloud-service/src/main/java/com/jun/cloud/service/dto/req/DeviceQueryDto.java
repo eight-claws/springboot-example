@@ -17,14 +17,14 @@ import javax.validation.constraints.NotEmpty;
 @ApiModel(value = "设备查询请求对象")
 public class DeviceQueryDto extends PageQueryDto {
 
-    @ApiModelProperty(value = "设备名称" ,name = "deviceName")
+    @ApiModelProperty(value = "设备名称", name = "deviceName")
     private String deviceName;
 
     @NotEmpty(message = "region.not.null")
-    @ApiModelProperty(value = "设备所在区域code" ,name = "regionCode")
+    @ApiModelProperty(value = "设备所在区域code", name = "regionCode")
     private String regionCode;
 
-    @ApiModelProperty(value = "设备协议" ,name = "treatyType")
+    @ApiModelProperty(value = "设备协议", name = "treatyType")
     private String treatyType;
 
 

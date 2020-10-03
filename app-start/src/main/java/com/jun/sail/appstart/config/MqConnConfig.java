@@ -18,7 +18,7 @@ public class MqConnConfig implements SmartLifecycle {
     private boolean running = false;
 
 
-    public void setRunning(boolean running){
+    public void setRunning(boolean running) {
         this.running = running;
     }
 

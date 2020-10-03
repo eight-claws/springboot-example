@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author 余生君
@@ -24,7 +24,7 @@ import java.time.LocalDateTime;
 @Accessors(chain = true)
 public class Region implements Serializable {
 
-private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     /**
      * 主键，32位uuid
@@ -79,7 +79,6 @@ private static final long serialVersionUID=1L;
     private LocalDateTime updateTime;
 
     private Integer sort;
-
 
 
 }

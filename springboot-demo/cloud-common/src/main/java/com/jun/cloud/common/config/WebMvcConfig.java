@@ -48,7 +48,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //对外提供的api接口验证及追踪日志
-       //registry.addInterceptor(new RestApiInterceptor()).addPathPatterns("/api/**");
+        //registry.addInterceptor(new RestApiInterceptor()).addPathPatterns("/api/**");
         registry.addInterceptor(new InterceptorDemo()).addPathPatterns("/**");
     }
 
@@ -76,10 +76,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
     //}
 
     @Bean
-    public StringHttpMessageConverter stringHttpMessageConverter(){
+    public StringHttpMessageConverter stringHttpMessageConverter() {
         StringHttpMessageConverter stringConvert = new StringHttpMessageConverter();
-        List<MediaType> stringMediaTypes = new ArrayList<MediaType>(){{
-            add(new MediaType("text","plain",Charset.forName("UTF-8")));
+        List<MediaType> stringMediaTypes = new ArrayList<MediaType>() {{
+            add(new MediaType("text", "plain", Charset.forName("UTF-8")));
         }};
         stringConvert.setSupportedMediaTypes(stringMediaTypes);
         return stringConvert;
@@ -96,7 +96,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
      * Json序列化和反序列化转换器，用于转换Post请求体中的json以及将我们的对象序列化为返回响应的json
      */
     @Bean
-    public ObjectMapper customDateObjectMapper(){
+    public ObjectMapper customDateObjectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         objectMapper.disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE);
@@ -104,12 +104,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
         //LocalDateTime系列序列化和反序列化模块，继承自jsr310，这里修改了日期格式
         JavaTimeModule javaTimeModule = new JavaTimeModule();
-        javaTimeModule.addSerializer(LocalDateTime.class,new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DateTimeUtil.DATE_FORMAT_yyyy_MM_dd_HH_mm_ss)));
-        javaTimeModule.addSerializer(LocalDate.class,new LocalDateSerializer(DateTimeFormatter.ofPattern(DateTimeUtil.DATE_FORMAT_yyyy_MM_dd)));
-        javaTimeModule.addSerializer(LocalTime.class,new LocalTimeSerializer(DateTimeFormatter.ofPattern(DateTimeUtil.DATE_FORMAT_HH_mm_ss)));
-        javaTimeModule.addDeserializer(LocalDateTime.class,new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(DateTimeUtil.DATE_FORMAT_yyyy_MM_dd_HH_mm_ss)));
-        javaTimeModule.addDeserializer(LocalDate.class,new LocalDateDeserializer(DateTimeFormatter.ofPattern(DateTimeUtil.DATE_FORMAT_yyyy_MM_dd)));
-        javaTimeModule.addDeserializer(LocalTime.class,new LocalTimeDeserializer(DateTimeFormatter.ofPattern(DateTimeUtil.DATE_FORMAT_HH_mm_ss)));
+        javaTimeModule.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DateTimeUtil.DATE_FORMAT_yyyy_MM_dd_HH_mm_ss)));
+        javaTimeModule.addSerializer(LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ofPattern(DateTimeUtil.DATE_FORMAT_yyyy_MM_dd)));
+        javaTimeModule.addSerializer(LocalTime.class, new LocalTimeSerializer(DateTimeFormatter.ofPattern(DateTimeUtil.DATE_FORMAT_HH_mm_ss)));
+        javaTimeModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(DateTimeUtil.DATE_FORMAT_yyyy_MM_dd_HH_mm_ss)));
+        javaTimeModule.addDeserializer(LocalDate.class, new LocalDateDeserializer(DateTimeFormatter.ofPattern(DateTimeUtil.DATE_FORMAT_yyyy_MM_dd)));
+        javaTimeModule.addDeserializer(LocalTime.class, new LocalTimeDeserializer(DateTimeFormatter.ofPattern(DateTimeUtil.DATE_FORMAT_HH_mm_ss)));
 
         objectMapper.registerModule(javaTimeModule);
         return objectMapper;
@@ -123,10 +123,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return new Converter<String, LocalDate>() {
             @Override
             public LocalDate convert(String source) {
-                if(!ObjectUtils.isEmpty(source)){
+                if (!ObjectUtils.isEmpty(source)) {
                     return LocalDate.parse(source, DateTimeFormatter.ofPattern(DateTimeUtil.DATE_FORMAT_yyyy_MM_dd));
                 }
-                return null ;
+                return null;
 
             }
         };
@@ -139,10 +139,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return new Converter<String, LocalDateTime>() {
             @Override
             public LocalDateTime convert(String source) {
-                if(!ObjectUtils.isEmpty(source)) {
+                if (!ObjectUtils.isEmpty(source)) {
                     return LocalDateTime.parse(source, DateTimeFormatter.ofPattern(DateTimeUtil.DATE_FORMAT_yyyy_MM_dd_HH_mm_ss));
                 }
-                return null ;
+                return null;
             }
         };
     }
@@ -154,7 +154,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return new Converter<String, LocalTime>() {
             @Override
             public LocalTime convert(String source) {
-                if(!ObjectUtils.isEmpty(source)) {
+                if (!ObjectUtils.isEmpty(source)) {
                     return LocalTime.parse(source, DateTimeFormatter.ofPattern(DateTimeUtil.DATE_FORMAT_HH_mm_ss));
                 }
                 return null;

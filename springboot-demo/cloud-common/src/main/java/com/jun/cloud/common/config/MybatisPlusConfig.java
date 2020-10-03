@@ -20,12 +20,12 @@ public class MybatisPlusConfig {
      */
     @Bean
     @Profile("dev")
-    public PerformanceInterceptor performanceInterceptor(){
+    public PerformanceInterceptor performanceInterceptor() {
         return new PerformanceInterceptor();
     }
 
     @Bean
-    public PaginationInterceptor paginationInterceptor(){
+    public PaginationInterceptor paginationInterceptor() {
         return new PaginationInterceptor();
     }
 

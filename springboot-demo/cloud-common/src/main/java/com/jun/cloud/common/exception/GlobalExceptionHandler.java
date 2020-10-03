@@ -29,15 +29,15 @@ import java.util.Set;
 public class GlobalExceptionHandler {
 
     /**
-     *  post请求校验失败
+     * post请求校验失败
      */
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public BaseResponse<String> handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
         StringBuilder errorInfo = new StringBuilder();
         BindingResult bindingResult = exception.getBindingResult();
-        for(int i = 0; i < bindingResult.getFieldErrors().size(); i++){
-            if(i > 0){
+        for (int i = 0; i < bindingResult.getFieldErrors().size(); i++) {
+            if (i > 0) {
                 errorInfo.append(" ; ");
             }
             FieldError fieldError = bindingResult.getFieldErrors().get(i);
@@ -62,13 +62,13 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public BaseResponse<String> handleConstraintViolationException(ConstraintViolationException exception) {
         StringBuilder errorInfo = new StringBuilder();
-        String errorMessage ;
+        String errorMessage;
 
         Set<ConstraintViolation<?>> violations = exception.getConstraintViolations();
         for (ConstraintViolation<?> item : violations) {
             errorInfo.append(item.getMessage()).append(" ; ");
         }
-        errorMessage = errorInfo.toString().substring(0, errorInfo.toString().length()-1);
+        errorMessage = errorInfo.toString().substring(0, errorInfo.toString().length() - 1);
 
         BaseResponse<String> response = new BaseResponse<>();
         response.setMsg(errorMessage);
@@ -83,21 +83,21 @@ public class GlobalExceptionHandler {
     public BaseResponse handleBindException(BindException exception) {
         List<ObjectError> errors = exception.getAllErrors();
         String msg = null;
-        if(ObjectUtils.isNotEmpty(errors)) {
+        if (ObjectUtils.isNotEmpty(errors)) {
             int first = 0;
-            for(int i = 0; i < errors.size(); i++ ) {
+            for (int i = 0; i < errors.size(); i++) {
                 ObjectError error = errors.get(i);
                 String message = error.getDefaultMessage();
                 String field = null;
-                if(error instanceof FieldError) {
-                    field = ((FieldError)error).getField();
+                if (error instanceof FieldError) {
+                    field = ((FieldError) error).getField();
                 }
 
                 String i18Msg = I18nUtils.getMessage(message);
-                if(ObjectUtils.isEmpty(i18Msg)) {
+                if (ObjectUtils.isEmpty(i18Msg)) {
                     i18Msg = msg;
                 }
-                if(i == first) {
+                if (i == first) {
                     //取一个错误信息传给前端
                     msg = i18Msg;
                 }

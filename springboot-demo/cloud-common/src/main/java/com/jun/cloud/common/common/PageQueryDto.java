@@ -15,7 +15,7 @@ import javax.validation.constraints.Min;
 @ApiModel(value = "分页查询对象")
 public class PageQueryDto {
 
-    @ApiModelProperty(value = "页数 ，默认为1" )
+    @ApiModelProperty(value = "页数 ，默认为1")
     @Min(value = 1, message = "pageNo.min.value.illegal")
     private Integer pageNo = 1;
 

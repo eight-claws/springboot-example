@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class CloudStartApplicationTest {
 
     @Test
-    public void str(){
+    public void str() {
         //Stream stream;
         //
         ////由单独的值构成
@@ -50,7 +50,6 @@ public class CloudStartApplicationTest {
         //生成15个随机整数，用来构造测试不失为一种简便的方式
 
 
-
         ////生成100以内的15个随机整数，用来构造测试不失为一种简便的方式
         //Stream.generate(() -> new Random().nextInt(100)).limit(15).forEach(System.out::println);
         //
@@ -62,9 +61,7 @@ public class CloudStartApplicationTest {
         //new Random().ints().limit(15).forEach(System.out::println);
 
 
-
     }
-
 
 
 }

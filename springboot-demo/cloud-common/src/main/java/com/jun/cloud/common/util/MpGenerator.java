@@ -22,7 +22,7 @@ import java.util.List;
 public class MpGenerator {
 
 
-    private static final String[] TABLE_NAMES = {"device","region"};
+    private static final String[] TABLE_NAMES = {"device", "region"};
 
     static String author = "余生君";
 

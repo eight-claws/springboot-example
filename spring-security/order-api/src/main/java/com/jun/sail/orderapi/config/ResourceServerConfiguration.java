@@ -37,7 +37,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     public void configure(HttpSecurity http) throws Exception {
         http.
                 // 我的理解是这里开启暴露/openapi的url
-                requestMatchers().antMatchers("/openapi/**")
+                        requestMatchers().antMatchers("/openapi/**")
                 .and()
                 .authorizeRequests()
                 // 这里配置/openapi开头的endpoints需要openapi的scope权限

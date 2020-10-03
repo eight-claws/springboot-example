@@ -15,10 +15,10 @@ import java.time.LocalTime;
 @ApiModel("测试时间Get对象")
 public class DateTimeGetDto {
 
-    @ApiModelProperty(name = "pathTime", notes = "路径上输入时间，返回一天后的时间",example = "12:00:45",required = true)
+    @ApiModelProperty(name = "pathTime", notes = "路径上输入时间，返回一天后的时间", example = "12:00:45", required = true)
     private LocalTime pathTime;
 
-    @ApiModelProperty(name = "startDateTime", notes = "开始日期，返回一天后的时间",example = "2019-05-08 06:05:12",required = true)
+    @ApiModelProperty(name = "startDateTime", notes = "开始日期，返回一天后的时间", example = "2019-05-08 06:05:12", required = true)
     private LocalDateTime startDateTime;
 
 }

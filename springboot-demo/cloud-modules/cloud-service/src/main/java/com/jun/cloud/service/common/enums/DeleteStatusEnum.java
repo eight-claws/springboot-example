@@ -14,20 +14,18 @@ public enum DeleteStatusEnum {
     private String desc;
 
 
-    DeleteStatusEnum(Integer deleteStatus, String desc){
+    DeleteStatusEnum(Integer deleteStatus, String desc) {
         this.status = deleteStatus;
         this.desc = desc;
     }
 
-    public Integer getStatus(){
+    public Integer getStatus() {
         return this.status;
     }
 
-    public String getDesc(){
+    public String getDesc() {
         return this.desc;
     }
-
-
 
 
 }
