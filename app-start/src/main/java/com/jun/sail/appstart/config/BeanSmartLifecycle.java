@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class MqConnConfig implements SmartLifecycle {
+public class BeanSmartLifecycle implements SmartLifecycle {
 
     private boolean running = false;
 
