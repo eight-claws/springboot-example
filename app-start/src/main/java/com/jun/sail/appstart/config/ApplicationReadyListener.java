@@ -25,6 +25,8 @@ public class ApplicationReadyListener implements ApplicationRunner, CommandLineR
     public void run(ApplicationArguments args) throws Exception {
         log.info(AppStartConstant.LOG_SPARATOR + "[ ApplicationRunner ]");
 
+        System.out.println("hot fix");
+
         // 不捕获会导致容器启动失败
         try {
             // throw new RuntimeException("任务执行失败");
