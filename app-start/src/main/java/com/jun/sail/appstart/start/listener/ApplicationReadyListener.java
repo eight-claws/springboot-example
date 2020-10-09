@@ -1,4 +1,4 @@
-package com.jun.sail.appstart.config;
+package com.jun.sail.appstart.start.listener;
 
 import com.jun.sail.HelloService;
 import com.jun.sail.appstart.constants.AppStartConstant;
@@ -28,7 +28,7 @@ public class ApplicationReadyListener implements ApplicationRunner, CommandLineR
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        log.info(AppStartConstant.LOG_SPARATOR + "[ ApplicationRunner ]");
+        log.info(AppStartConstant.LOG_SEPARATOR_APP + "[ ApplicationRunner ]");
 
         System.out.println(helloService.sayHello("jun"));
 
@@ -42,12 +42,12 @@ public class ApplicationReadyListener implements ApplicationRunner, CommandLineR
 
     @Override
     public void run(String... args) throws Exception {
-        log.info(AppStartConstant.LOG_SPARATOR + "[ CommandLineRunner ]");
+        log.info(AppStartConstant.LOG_SEPARATOR_APP + "[ CommandLineRunner ]");
     }
 
     @EventListener(classes = ApplicationReadyEvent.class)
     public void processInit() {
-        log.info(AppStartConstant.LOG_SPARATOR + "[ listener ApplicationReadyEvent ]");
+        log.info(AppStartConstant.LOG_SEPARATOR_APP + "[ listener ApplicationReadyEvent ]");
         // throw new RuntimeException("任务执行失败");
     }
 

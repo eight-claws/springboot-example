@@ -1,4 +1,4 @@
-package com.jun.sail.appstart.config;
+package com.jun.sail.appstart.bean.lifecycle;
 
 import com.jun.sail.appstart.constants.AppStartConstant;
 import lombok.Getter;
@@ -17,7 +17,7 @@ import java.util.HashMap;
  */
 @Component
 @Slf4j
-public class BeanAfterInitializer implements SmartInitializingSingleton, InitializingBean {
+public class MyBean implements SmartInitializingSingleton, InitializingBean {
 
     /**
      * 在所有的单例bean都加载完成后，再一次从beanDefinitionNames列表中获得所有要注入的bean，
@@ -25,15 +25,15 @@ public class BeanAfterInitializer implements SmartInitializingSingleton, Initial
      */
     @Override
     public void afterSingletonsInstantiated() {
-        log.info(AppStartConstant.LOG_SPARATOR + "[ SmartInitializingSingleton ]");
+        log.info(AppStartConstant.LOG_SEPARATOR_BEAN + "[ SmartInitializingSingleton ]");
     }
 
     /**
-     * 在getBean()方法注入bean时，调用这个方法
+     * 在getBean()方法执行时，也就是实例化bean时，调用这个方法
      */
     @Override
     public void afterPropertiesSet() throws Exception {
-        log.info(AppStartConstant.LOG_SPARATOR + "[ InitializingBean ]");
+        log.info(AppStartConstant.LOG_SEPARATOR_BEAN + "[ InitializingBean ]");
     }
 
     @Getter
@@ -46,12 +46,24 @@ public class BeanAfterInitializer implements SmartInitializingSingleton, Initial
      */
     @PostConstruct
     public void init() {
-        log.info(AppStartConstant.LOG_SPARATOR + "[ PostConstruct ]");
+        log.info(AppStartConstant.LOG_SEPARATOR_BEAN + "[ PostConstruct ]");
 
         typeMap = new HashMap<>();
         typeMap.put("1", "IOS");
         typeMap.put("2", "ANDROID");
         typeMap.put("3", "ANDROID-GOOGLEPLAY");
+        System.out.println(this.name);
+    }
+
+    private String name;
+
+    public MyBean(String name) {
+        log.info(AppStartConstant.LOG_SEPARATOR_BEAN + "[ 调用了有参构造器 ]");
+        this.name = name;
+    }
+
+    public MyBean(){
+        log.info(AppStartConstant.LOG_SEPARATOR_BEAN + "[ 调用了无参构造器 ]");
     }
 
 

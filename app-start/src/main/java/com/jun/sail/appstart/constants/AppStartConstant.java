@@ -6,7 +6,9 @@ package com.jun.sail.appstart.constants;
  */
 public interface AppStartConstant {
 
-    String LOG_SPARATOR = "============== ";
+    String LOG_SEPARATOR_BEAN = "bean ============== ";
+
+    String LOG_SEPARATOR_APP = "app start--------- ";
 
 
 }

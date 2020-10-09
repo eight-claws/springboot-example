@@ -1,4 +1,4 @@
-package com.jun.sail.appstart.config;
+package com.jun.sail.appstart.bean.lifecycle;
 
 import com.jun.sail.appstart.constants.AppStartConstant;
 import lombok.extern.slf4j.Slf4j;
@@ -25,14 +25,14 @@ public class BeanSmartLifecycle implements SmartLifecycle {
 
     @Override
     public void start() {
-        log.info(AppStartConstant.LOG_SPARATOR + "[ SmartLifecycle ]");
+        log.info(AppStartConstant.LOG_SEPARATOR_BEAN + "[ SmartLifecycle ]");
         setRunning(true);
 
     }
 
     @Override
     public void stop() {
-        log.info(AppStartConstant.LOG_SPARATOR + "app stop, SmartLifecycle-stop() is invoked");
+        log.info(AppStartConstant.LOG_SEPARATOR_BEAN + "app stop, SmartLifecycle-stop() is invoked");
         setRunning(false);
     }
 
@@ -42,7 +42,7 @@ public class BeanSmartLifecycle implements SmartLifecycle {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                log.info(AppStartConstant.LOG_SPARATOR + "app stop, SmartLifecycle-start(Runnable callback) is invoked");
+                log.info(AppStartConstant.LOG_SEPARATOR_BEAN + "app stop, SmartLifecycle-start(Runnable callback) is invoked");
 
                 //设置为false，表示已经不在执行中了
                 setRunning(false);
