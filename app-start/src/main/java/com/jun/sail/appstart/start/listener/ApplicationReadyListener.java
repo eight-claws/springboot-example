@@ -26,6 +26,12 @@ public class ApplicationReadyListener implements ApplicationRunner, CommandLineR
     @Autowired
     private HelloService helloService;
 
+    @EventListener(classes = ApplicationReadyEvent.class)
+    public void processInit() {
+        log.info(AppStartConstant.LOG_SEPARATOR_APP + "[ listener ApplicationReadyEvent ]");
+        // throw new RuntimeException("任务执行失败");
+    }
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
         log.info(AppStartConstant.LOG_SEPARATOR_APP + "[ ApplicationRunner ]");
@@ -45,10 +51,5 @@ public class ApplicationReadyListener implements ApplicationRunner, CommandLineR
         log.info(AppStartConstant.LOG_SEPARATOR_APP + "[ CommandLineRunner ]");
     }
 
-    @EventListener(classes = ApplicationReadyEvent.class)
-    public void processInit() {
-        log.info(AppStartConstant.LOG_SEPARATOR_APP + "[ listener ApplicationReadyEvent ]");
-        // throw new RuntimeException("任务执行失败");
-    }
 
 }
