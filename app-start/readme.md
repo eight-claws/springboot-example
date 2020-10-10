@@ -32,3 +32,11 @@
     >这个接口可以被一个单例的bean实现，在BeanFactory实例化所有单例bean之后执行。
     一般用来执行一些init逻辑，在想要急切获取其他bean时可以用来替换InitializingBean.afterPropertiesSet()的方案
   - **SmartLifecycle.start()**
+    >Lifecycle接口的扩展，用来实现想在容器启动刷新，或者shutdown时执行一些逻辑。
+     isAutoStartup()用来表示在容器刷新时这个bean是否启动，否则只有容器start时重新创建
+     stop(Runnable)用于需要异步的关闭逻辑，必须要调用callback.run()
+     Phased用于控制多个bean的启动顺序，value较小的会先启动，shutdown时会后关闭。
+     如ComponentB依赖componentA先启动，则componentA.phase()应该返回一个较小的值，关闭时B会先关闭。
+     如果明确指定depends-on，以depends-on为准。
+     任何没有实现SmartLifecycle的bean的phase会是0，这也就意味着如果SmartLifecycle Bean的phase返回负数，将优先于所有的容器bean启动，正数反之。
+     SmartLifecycle的DEFAULT_PHASE = Integer.MAX_VALUE;

@@ -17,17 +17,14 @@ public class BeanSmartLifecycle implements SmartLifecycle {
 
     private boolean running = false;
 
-
     public void setRunning(boolean running) {
         this.running = running;
     }
 
-
     @Override
     public void start() {
-        log.info(AppStartConstant.LOG_SEPARATOR_BEAN + "[ SmartLifecycle ]");
+        log.info(AppStartConstant.LOG_SEPARATOR_BEAN + "[ Lifecycle ]");
         setRunning(true);
-
     }
 
     @Override
@@ -37,36 +34,45 @@ public class BeanSmartLifecycle implements SmartLifecycle {
     }
 
     @Override
-    public void stop(Runnable callback) {
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                log.info(AppStartConstant.LOG_SEPARATOR_BEAN + "app stop, SmartLifecycle-start(Runnable callback) is invoked");
-
-                //设置为false，表示已经不在执行中了
-                setRunning(false);
-
-                //callback中有个CountDownLatch实例，总数是SmartLifecycle对象的数量，
-                //此方法被回调时CountDownLatch实例才会减一，初始化容器的线程一直在wait中；
-                callback.run();
-            }
-        }).start();
-    }
-
-
-    @Override
     public boolean isRunning() {
         return running;
     }
 
+
+    /**
+     * 上面是Lifecycle规定的接口
+     *
+     * ================================================
+     *
+     * 下面是SmartLifecycle规定的接口
+     */
     @Override
     public boolean isAutoStartup() {
         //只有设置为true，start方法才会被回调
         return true;
     }
 
+    @Override
+    public void stop(Runnable callback) {
+        new Thread(() -> {
+            log.info(AppStartConstant.LOG_SEPARATOR_BEAN + "app stop, SmartLifecycle-start(Runnable callback) is invoked");
 
+            //设置为false，表示已经不在执行中了
+            setRunning(false);
+
+            //callback中有个CountDownLatch实例，总数是SmartLifecycle对象的数量，
+            //此方法被回调时CountDownLatch实例才会减一，初始化容器的线程一直在wait中；
+            callback.run();
+        }).start();
+    }
+
+    /**
+     *  Phased用于控制多个bean的启动顺序，value较小的会先启动，shutdown时会后关闭。
+     *  如ComponentB依赖componentA先启动，则componentA.phase()应该返回一个较小的值，关闭时B会先关闭。
+     *  如果明确指定depends-on，以depends-on为准。
+     * 默认返回Integer.MAX_VALUE，也就是after其他容器bean
+     * @return
+     */
     @Override
     public int getPhase() {
         return 0;
