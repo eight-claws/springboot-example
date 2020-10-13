@@ -36,6 +36,7 @@ public class ApplicationReadyListener implements ApplicationRunner, CommandLineR
     public void run(ApplicationArguments args) throws Exception {
         log.info(AppStartConstant.LOG_SEPARATOR_APP + "[ ApplicationRunner ]");
 
+
         System.out.println(helloService.sayHello("jun"));
 
         // 不捕获会导致容器启动失败

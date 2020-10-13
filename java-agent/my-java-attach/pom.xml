@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.jun.sail</groupId>
-    <artifactId>my-service</artifactId>
+    <artifactId>my-java-attach</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>my-service</name>
-    <description>Demo project for Spring Boot</description>
+    <name>my-java-attach</name>
+    <description>负责运行起来，attach目标jvm</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -20,19 +20,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.javassist</groupId>
-            <artifactId>javassist</artifactId>
-            <version>3.23.1-GA</version>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.taobao.arthas</groupId>
-            <artifactId>arthas-spring-boot-starter</artifactId>
-            <version>3.4.3</version>
+            <artifactId>spring-boot-starter</artifactId>
         </dependency>
 
         <dependency>
