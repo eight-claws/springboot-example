@@ -12,7 +12,7 @@ import java.io.File;
  * 启动时在program arguments填入--pid=19816，即监控目标jvm pid，或者手动替换pid也可
  * attach到目标jvm后，通过load把自己写的agent放进去。主要的逻辑还是在agent里
  */
-@Component
+// @Component
 public class AppStartListener implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {

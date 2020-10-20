@@ -1,6 +1,8 @@
-package com.jun.sail.appstart.myimport;
+package com.jun.sail.appstart.myimport.config;
 
-import com.jun.sail.appstart.myimport.beandefinition.AsyncConfigImportRegistrar;
+import com.jun.sail.appstart.myimport.NormalBean;
+import com.jun.sail.appstart.myimport.SpringUtilImportSelector;
+import com.jun.sail.appstart.myimport.beandefinition.AsyncConfigBeanDefinitionRegistrar;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.ElementType;
@@ -10,7 +12,7 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Import({SpringUtil.class, BoyImportSelector.class, AsyncConfigImportRegistrar.class})
+@Import({NormalBean.class, SpringUtilImportSelector.class, AsyncConfigBeanDefinitionRegistrar.class})
 public @interface EnableCustomConfig {
     // 注解的属性，默认为true
     boolean flag() default true;

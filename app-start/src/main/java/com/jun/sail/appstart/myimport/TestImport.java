@@ -1,5 +1,7 @@
 package com.jun.sail.appstart.myimport;
 
+import com.jun.sail.appstart.myimport.beandefinition.IUserService;
+import com.jun.sail.appstart.myimport.config.EnableCustomConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -8,19 +10,21 @@ import javax.annotation.PostConstruct;
 @EnableCustomConfig // 注意要声明这个注解，才会生效注解上面的@Import
 @Component
 public class TestImport {
+
     @Autowired
     private SpringUtil springUtil;
 
     @Autowired
-    private Boy boy;
+    private NormalBean normalBean;
 
     @Autowired
-    private Dog dog;
+    private IUserService userService;
 
     @PostConstruct
     public void init() {
         System.out.println(springUtil.getName());
-        System.out.println(boy.getName());
-        System.out.println(dog.getName());
+        System.out.println(normalBean.getName());
+        userService.testAdd();
+        userService.testGet();
     }
 }
