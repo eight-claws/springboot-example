@@ -3,6 +3,9 @@
 从几个spring提供的关键的PostProcessor处理器，来帮助理解spring创建bean的过程：
 
 下面是按方法执行的前后顺序排列
+  - **BeanDefinitionRegistryPostProcessor**
+    > 继承BeanFactoryPostProcessor，允许更多的bean definitions注册，运行在BeanFactoryPostProcessor之前
+      特别的，这个类可以注册更多的bean definitions，甚至包括BeanFactoryPostProcessor的实例
   - **BeanFactoryPostProcessor.postProcessBeanFactory()**
     > 用来在所有的bean definitions加载后，但是还没有实例化bean之前调用本方法，所以本方法非常超前执行
     可以修改bean的定义，如是否是单例，是否lazy init，DependsOn，FactoryBeanName等等等等，一般用来修改属性值，一个典型的实现是PropertyResourceConfigurer，用来从配置文件里加载属性放进bean里，或者更换${...}placeHolder

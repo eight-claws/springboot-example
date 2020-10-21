@@ -1,4 +1,4 @@
-package com.jun.sail.appstart.myimport.beandefinition;
+package com.jun.sail.importdemo.myimport.beandefinition;
 
 import org.springframework.stereotype.Service;
 

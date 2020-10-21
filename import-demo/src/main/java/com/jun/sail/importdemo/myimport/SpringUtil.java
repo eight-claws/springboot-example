@@ -1,4 +1,4 @@
-package com.jun.sail.appstart.myimport;
+package com.jun.sail.importdemo.myimport;
 
 import lombok.Data;
 

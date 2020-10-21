@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * ApplicationRunner和CommandLineRunner是容器启动过程中的回调
- *
+ * <p>
  * 注意下面三种方式，发生异常都会导致容器启动失败
  *
  * @author Jun

@@ -1,6 +1,6 @@
-package com.jun.sail.appstart.myimport;
+package com.jun.sail.importdemo.myimport;
 
-import com.jun.sail.appstart.myimport.config.EnableCustomConfig;
+import com.jun.sail.importdemo.myimport.config.EnableCustomConfig;
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
 

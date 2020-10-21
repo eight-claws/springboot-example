@@ -1,4 +1,4 @@
-package com.jun.sail.appstart.myimport.config;
+package com.jun.sail.importdemo.myimport.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

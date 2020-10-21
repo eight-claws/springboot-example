@@ -18,7 +18,7 @@ public class CustomerBeanPostProcessor implements BeanPostProcessor {
      */
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        if(bean instanceof MyBean){
+        if (bean instanceof MyBean) {
             MyBean myBean = (MyBean) bean;
             log.info(AppStartConstant.LOG_SEPARATOR_BEAN + "[ BeanPostProcessor.postProcessBeforeInitialization ]");
         }
@@ -33,13 +33,12 @@ public class CustomerBeanPostProcessor implements BeanPostProcessor {
      */
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        if(bean instanceof MyBean){
+        if (bean instanceof MyBean) {
             MyBean myBean = (MyBean) bean;
             log.info(AppStartConstant.LOG_SEPARATOR_BEAN + "[ BeanPostProcessor.postProcessAfterInitialization ]");
         }
         return bean;
     }
-
 
 
 }

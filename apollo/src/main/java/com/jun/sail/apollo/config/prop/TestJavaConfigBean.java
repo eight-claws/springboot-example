@@ -13,14 +13,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class TestJavaConfigBean {
 
-  @Value("${timeout:100}")
-  private int timeout;
+    @Value("${timeout:100}")
+    private int timeout;
 
-  private int batch;
- 
-  @Value("${batch:200}")
-  public void setBatch(int batch) {
-    this.batch = batch;
-  }
- 
+    private int batch;
+
+    @Value("${batch:200}")
+    public void setBatch(int batch) {
+        this.batch = batch;
+    }
+
 }

@@ -1,8 +1,8 @@
-package com.jun.sail.appstart.myimport.config;
+package com.jun.sail.importdemo.myimport.config;
 
-import com.jun.sail.appstart.myimport.NormalBean;
-import com.jun.sail.appstart.myimport.SpringUtilImportSelector;
-import com.jun.sail.appstart.myimport.beandefinition.AsyncConfigBeanDefinitionRegistrar;
+import com.jun.sail.importdemo.myimport.NormalBean;
+import com.jun.sail.importdemo.myimport.SpringUtilImportSelector;
+import com.jun.sail.importdemo.myimport.beandefinition.AsyncConfigBeanDefinitionRegistrar;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.ElementType;

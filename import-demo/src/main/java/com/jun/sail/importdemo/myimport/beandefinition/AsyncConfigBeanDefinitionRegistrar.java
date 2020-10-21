@@ -1,6 +1,6 @@
-package com.jun.sail.appstart.myimport.beandefinition;
+package com.jun.sail.importdemo.myimport.beandefinition;
 
-import com.jun.sail.appstart.myimport.config.EnableCustomConfig;
+import com.jun.sail.importdemo.myimport.config.EnableCustomConfig;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;

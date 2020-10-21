@@ -12,6 +12,7 @@ import java.util.HashMap;
 
 /**
  * 关于SmartInitializingSingleton和InitializingBean的区别：https://blog.csdn.net/lkforce/article/details/106721239
+ *
  * @author Jun
  * 创建时间： 2020/5/17
  */
@@ -62,7 +63,7 @@ public class MyBean implements SmartInitializingSingleton, InitializingBean {
         this.name = name;
     }
 
-    public MyBean(){
+    public MyBean() {
         log.info(AppStartConstant.LOG_SEPARATOR_BEAN + "[ 调用了无参构造器 ]");
     }
 

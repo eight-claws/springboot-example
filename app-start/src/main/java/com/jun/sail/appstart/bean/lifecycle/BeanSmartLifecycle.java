@@ -41,9 +41,9 @@ public class BeanSmartLifecycle implements SmartLifecycle {
 
     /**
      * 上面是Lifecycle规定的接口
-     *
+     * <p>
      * ================================================
-     *
+     * <p>
      * 下面是SmartLifecycle规定的接口
      */
     @Override
@@ -67,10 +67,11 @@ public class BeanSmartLifecycle implements SmartLifecycle {
     }
 
     /**
-     *  Phased用于控制多个bean的启动顺序，value较小的会先启动，shutdown时会后关闭。
-     *  如ComponentB依赖componentA先启动，则componentA.phase()应该返回一个较小的值，关闭时B会先关闭。
-     *  如果明确指定depends-on，以depends-on为准。
+     * Phased用于控制多个bean的启动顺序，value较小的会先启动，shutdown时会后关闭。
+     * 如ComponentB依赖componentA先启动，则componentA.phase()应该返回一个较小的值，关闭时B会先关闭。
+     * 如果明确指定depends-on，以depends-on为准。
      * 默认返回Integer.MAX_VALUE，也就是after其他容器bean
+     *
      * @return
      */
     @Override
