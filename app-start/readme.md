@@ -1,6 +1,6 @@
 # ABOUT
 
-从几个spring提供的关键的PostProcessor处理器，来帮助理解spring创建bean的过程：
+## 从几个spring提供的关键的PostProcessor处理器，来帮助理解spring创建bean的过程：
 
 下面是按方法执行的前后顺序排列
   - **BeanDefinitionRegistryPostProcessor**
@@ -43,3 +43,21 @@
      如果明确指定depends-on，以depends-on为准。
      任何没有实现SmartLifecycle的bean的phase会是0，这也就意味着如果SmartLifecycle Bean的phase返回负数，将优先于所有的容器bean启动，正数反之。
      SmartLifecycle的DEFAULT_PHASE = Integer.MAX_VALUE;
+                                   
+                                   
+## 单元测试
+   增加简单的mockmvc，测试controller接口
+   
+    @SpringBootTest
+    @AutoConfigureMockMvc
+    public class HelloControllerTest {
+        @Autowired
+        private MockMvc mvc;
+    
+        @Test
+        public void getHello() throws Exception {
+            mvc.perform(MockMvcRequestBuilders.get("/").accept(MediaType.APPLICATION_JSON))
+                    .andExpect(status().isOk())
+                    .andExpect(content().string(equalTo("Greetings from Spring Boot!")));
+        }
+    }
