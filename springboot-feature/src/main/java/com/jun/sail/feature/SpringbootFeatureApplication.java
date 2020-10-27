@@ -1,13 +1,13 @@
-package com.jun.sail.propertyread;
+package com.jun.sail.feature;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PropertyReadApplication {
+public class SpringbootFeatureApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(PropertyReadApplication.class, args);
+        SpringApplication.run(SpringbootFeatureApplication.class, args);
     }
 
 }
