@@ -31,15 +31,23 @@
         </dependency>
         <!-- springboot的依赖end-->
 
+        <!--springboot高版本之后需要手动引入，否则参数校验的相关注解javax.validation.constraints找不到-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
 
         <!--swagger的依赖start-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
+            <version>2.6.1</version>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.6.1</version>
         </dependency>
         <!--swagger的依赖end-->
 

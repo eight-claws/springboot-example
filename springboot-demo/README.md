@@ -6,7 +6,8 @@
 
 # springmvc
 
-用于学习springmvc相关知识，并搭建一个基础框架用于其他内容的学习
+用于学习springmvc相关知识，并搭建一个基础框架用于其他内容的学习.
+需要先将sail-parent-dependence依赖安装到本地
 
 feature：
 - 1.自定义消息转换器MessageConverter

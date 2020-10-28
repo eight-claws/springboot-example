@@ -1,7 +1,12 @@
 package com.jun.cloud.common.config;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import javax.sql.DataSource;
 
 /**
  * 数据源相关配置
@@ -9,9 +14,9 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class DataSourceConfig {
-    //
-    //@Autowired
-    //private IAgentService agentService;
+
+    // @Autowired
+    // private IAgentService agentService;
     //
     //@Autowired
     //private ServiceProperties serviceProperties;
@@ -21,13 +26,15 @@ public class DataSourceConfig {
     //@Autowired
     //private Environment environment;
     //
-    //@Bean
-    //@ConditionalOnMissingBean
-    //public DataSource dataSource() throws Exception {
-    //    return _initDataSource(true);
-    //}
-    //
-    //private DataSource _initDataSource(boolean decryptPwd) throws SQLException {
+    @Bean
+    @ConditionalOnMissingBean
+    public DataSource dataSource() throws Exception {
+
+       // return _initDataSource(true);
+        return null;
+    }
+
+    // private DataSource _initDataSource(boolean decryptPwd) throws SQLException {
     //    String dbSegmentId = serviceProperties.getDbSegmentId();
     //
     //    //后面需要解密
@@ -77,9 +84,9 @@ public class DataSourceConfig {
     //    }
     //    log.info(LogFormatter.toMsg("end init db","url","dbType"),datasource.getUrl(),datasource.getDbType());
     //    return datasource;
-    //}
-    //
-    //private boolean initDataSource(DruidDataSource dataSource) {
+    // }
+
+    // private boolean initDataSource(DruidDataSource dataSource) {
     //    try {
     //        dataSource.init();
     //    } catch (Exception e) {
@@ -92,7 +99,7 @@ public class DataSourceConfig {
     //        return false;
     //    }
     //    return true;
-    //}
+    // }
 
 
 }

@@ -15,10 +15,14 @@
 
     <!--父项目的坐标，父POM 包含了一些可以被继承的默认设置-->
     <parent>
-        <groupId>com.jun.sail</groupId>
-        <artifactId>sail-parent-dependence</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.4.RELEASE</version>
+        <!-- 父项目的pom.xml文件的相对路径。相对路径允许你选择一个不同的路径。默认值是../pom.xml。Maven首先在构建当前项目的地方寻找父项
+           目的pom，其次在文件系统的这个位置（relativePath位置），然后在本地仓库，最后在远程仓库寻找父项目的pom。 -->
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
 
     <!--包含的子模块-->
     <modules>

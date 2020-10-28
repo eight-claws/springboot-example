@@ -1,0 +1,15 @@
+@import是Spring中非常重要的基础注解，利用它可以高度自由的定制bean装载规则和注册逻辑。
+在第三方模块和Spring进行整合场景下使用非常频繁，比如EnableAsync/EnableBatchProcessing和EnableCaching都是通过Import来生效的。
+
+它的作用总结来说有下面4种：
+
+- 导入容器@Configuration修饰的配置bean
+
+- 实例ImportBeanDefinitionRegistrar的实现类，调用其registerBeanDefinitions方法
+
+- 实例ImportSelector的实现类，调用其selectImports方法；
+
+- 可以导入一个普通的java对象，spring4.2版本之后才支持
+
+
+本项目还实现了一个自定义的@MyAsync,模拟@Async实现方法的异步执行

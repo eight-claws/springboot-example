@@ -9,7 +9,6 @@ public class CloudStartApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(CloudStartApplication.class, args);
-
     }
 
 }

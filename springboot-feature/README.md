@@ -13,47 +13,47 @@
 
 ```java
 @SpringBootTest
-    @AutoConfigureMockMvc
-    public class HelloControllerTest {
-        @Autowired
-        private MockMvc mvc;
-    
-        @Test
-        public void getHello() throws Exception {
-            mvc.perform(MockMvcRequestBuilders.get("/").accept(MediaType.APPLICATION_JSON))
-                    .andExpect(status().isOk())
-                    .andExpect(content().string(equalTo("Greetings from Spring Boot!")));
-        }
+@AutoConfigureMockMvc
+public class HelloControllerTest {
+    @Autowired
+    private MockMvc mvc;
+
+    @Test
+    public void getHello() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/").accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string(equalTo("Greetings from Spring Boot!")));
     }
+}
 ```
 
 ```java
- @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-    public class HelloControllerIT {
-    
-        @LocalServerPort
-        private int port;
-    
-        private URL base;
-    
-        /**
-         * 就是为了方便测试使用，在使用@SpringBootTest时，会自动生成可注入。
-         * 默认忽略cookie和重定向
-         */
-        @Autowired
-        private TestRestTemplate template;
-    
-        @BeforeEach
-        public void setUp() throws Exception {
-            this.base = new URL("http://localhost:" + port + "/");
-        }
-    
-        @Test
-        public void getHello() throws Exception {
-            ResponseEntity<String> response = template.getForEntity(base.toString(), String.class);
-            assertThat(response.getBody()).isEqualTo("Greetings from Spring Boot!");
-        }
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class HelloControllerIT {
+
+    @LocalServerPort
+    private int port;
+
+    private URL base;
+
+    /**
+     * 就是为了方便测试使用，在使用@SpringBootTest时，会自动生成可注入。
+     * 默认忽略cookie和重定向
+     */
+    @Autowired
+    private TestRestTemplate template;
+
+    @BeforeEach
+    public void setUp() throws Exception {
+        this.base = new URL("http://localhost:" + port + "/");
     }
+
+    @Test
+    public void getHello() throws Exception {
+        ResponseEntity<String> response = template.getForEntity(base.toString(), String.class);
+        assertThat(response.getBody()).isEqualTo("Greetings from Spring Boot!");
+    }
+}
 ```
 ## spring-boot-starter-actuator 健康检查
 添加spring-boot-starter-actuator的依赖后，默认暴露以下断点：

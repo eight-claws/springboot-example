@@ -33,7 +33,7 @@ public class UserController {
 
     @GetMapping("/testLog")
     @ApiOperation(value = "用来触发请求，测试logger级别")
-    public BaseResponse testlogger() {
+    public BaseResponse<String> testlogger() {
         BaseResponse<String> response = new BaseResponse<>();
         log.trace("======trace");
         log.debug("======debug");
