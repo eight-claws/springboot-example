@@ -1,10 +1,10 @@
-package com.jun.cloud.service.service;
+package com.jun.cloud.service;
 
 import com.jun.cloud.common.common.PageData;
-import com.jun.cloud.service.common.enums.RegionTypeEnum;
 import com.jun.cloud.service.dto.RegionInfoDto;
 import com.jun.cloud.service.dto.RegionQueryDto;
 import com.jun.cloud.service.entity.Region;
+import com.jun.cloud.service.service.IRegionService;
 import com.jun.sail.utils.code.UuidUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,9 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.Assert;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * 测试实体属性相关

@@ -12,9 +12,13 @@
     </parent>
 
     <dependencies>
+<!--        <dependency>-->
+<!--            <groupId>com.jun.cloud</groupId>-->
+<!--            <artifactId>cloud-service</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.jun.cloud</groupId>
-            <artifactId>cloud-service</artifactId>
+            <artifactId>cloud-common</artifactId>
         </dependency>
     </dependencies>
 

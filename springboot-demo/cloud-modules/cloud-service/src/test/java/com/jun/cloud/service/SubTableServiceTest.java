@@ -1,4 +1,4 @@
-package com.jun.cloud.service.service;
+package com.jun.cloud.service;
 
 import com.jun.cloud.service.common.enums.SubTableEnum;
 import com.jun.cloud.service.service.impl.SubTableServiceImpl;

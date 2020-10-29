@@ -1,8 +1,10 @@
-package com.jun.cloud.service.service;
+package com.jun.cloud.service;
 
 import com.jun.cloud.service.common.enums.RegionTypeEnum;
 import com.jun.cloud.service.entity.Device;
 import com.jun.cloud.service.entity.Region;
+import com.jun.cloud.service.service.IDeviceService;
+import com.jun.cloud.service.service.IRegionService;
 import com.jun.sail.utils.code.UuidUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,7 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * @author Jun
