@@ -56,6 +56,7 @@ public class HelloControllerIT {
 }
 ```
 ## spring-boot-starter-actuator 健康检查
+[https://docs.spring.io/spring-boot/docs/2.3.3.RELEASE/actuator-api/html/提供的所有端点官方文档](https://docs.spring.io/spring-boot/docs/2.3.3.RELEASE/actuator-api/html/)
 添加spring-boot-starter-actuator的依赖后，默认暴露以下断点：
 - actuator/health
 > {
