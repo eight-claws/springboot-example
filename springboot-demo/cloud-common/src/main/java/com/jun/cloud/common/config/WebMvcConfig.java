@@ -26,6 +26,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -79,7 +80,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public StringHttpMessageConverter stringHttpMessageConverter() {
         StringHttpMessageConverter stringConvert = new StringHttpMessageConverter();
         List<MediaType> stringMediaTypes = new ArrayList<MediaType>() {{
-            add(new MediaType("text", "plain", Charset.forName("UTF-8")));
+            add(new MediaType("text", "plain", StandardCharsets.UTF_8));
         }};
         stringConvert.setSupportedMediaTypes(stringMediaTypes);
         return stringConvert;

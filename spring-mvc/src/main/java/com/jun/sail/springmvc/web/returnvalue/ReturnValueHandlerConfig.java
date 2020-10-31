@@ -1,4 +1,4 @@
-package com.jun.cloud.common.returnvalue;
+package com.jun.sail.springmvc.web.returnvalue;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +13,14 @@ import java.util.List;
 /**
  * 配置SailResponseReturnValueHandler
  * <p>
- * 其实@Responsebody注解也是基于ReturnValueHandler，相当于把返回值用jackson转成json了
+ *
  */
-@Configuration
+// @Configuration
 public class ReturnValueHandlerConfig implements InitializingBean {
 
+    /**
+     * 这个adapter非常关键，它初始化了所有的参数解析器和返回值处理器
+     */
     @Autowired
     private RequestMappingHandlerAdapter adapter;
 
@@ -33,6 +36,11 @@ public class ReturnValueHandlerConfig implements InitializingBean {
         adapter.setReturnValueHandlers(handlers);
     }
 
+    /**
+     * 这里装饰下@Responsebody的RequestResponseBodyMethodProcessor，
+     * 也就是在把返回值交给他之前先调用SailResponseReturnValueHandler，把返回值包装成RestResult
+     * 然后再由RequestResponseBodyMethodProcessor把返回值处理成json
+     */
     private void decorateHandlers(List<HandlerMethodReturnValueHandler> handlers) {
         handlers.stream()
                 .filter(handler -> handler instanceof RequestResponseBodyMethodProcessor)

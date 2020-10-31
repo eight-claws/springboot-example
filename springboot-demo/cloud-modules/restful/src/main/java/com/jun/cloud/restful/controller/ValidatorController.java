@@ -1,5 +1,6 @@
 package com.jun.cloud.restful.controller;
 
+import com.jun.cloud.common.returnvalue.SailResponse;
 import com.jun.cloud.restful.dto.CountGroupDto;
 import com.jun.cloud.restful.dto.UserDto;
 import com.jun.sail.sailvalidate.group.Save;
@@ -57,10 +58,9 @@ public class ValidatorController {
 
     @PostMapping(value = "/update")
     @ApiOperation(value = "修改用户")
-    public BaseResponse updatedUser(@Validated({Update.class, Default.class}) @RequestBody UserDto updateDto) {
-        BaseResponse<String> response = new BaseResponse<>();
-        response.setMsg("修改成功");
-        return response;
+    @SailResponse
+    public String updatedUser(@Validated({Update.class, Default.class}) @RequestBody UserDto updateDto) {
+        return "修改成功";
     }
 
     @InitBinder
