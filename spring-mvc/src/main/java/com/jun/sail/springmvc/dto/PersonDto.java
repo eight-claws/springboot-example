@@ -3,6 +3,9 @@ package com.jun.sail.springmvc.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 /**
  * @author Jun
  * 创建时间： 2019/5/12
@@ -15,15 +18,11 @@ public class PersonDto {
 
     private Integer age;
 
-    private String birthday;
+    private LocalDate birthday;
 
     private Integer height;
 
-    public PersonDto(String name, Integer age, Integer height) {
-        this.name = name;
-        this.age = age;
-        this.height = height;
-    }
+    private LocalDateTime signTime;
 
     public PersonDto() {
     }

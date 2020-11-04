@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @ConfigurationProperties(prefix = "person")
 @RestController
 @RequestMapping("/person")
@@ -27,7 +30,7 @@ public class PersonController {
     @SailResponse("查询成功")
     @GetMapping("/get")
     public PersonDto getPerson() {
-        return new PersonDto(name, age, birthday, height);
+        return new PersonDto(name, age, LocalDate.now(), height, LocalDateTime.now());
     }
 
     @SailResponse("保存成功")
