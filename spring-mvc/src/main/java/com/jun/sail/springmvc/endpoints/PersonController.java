@@ -1,5 +1,7 @@
 package com.jun.sail.springmvc.endpoints;
 
+import com.jun.sail.springmvc.constant.enums.DepartmentEnum;
+import com.jun.sail.springmvc.constant.enums.SexEnum;
 import com.jun.sail.springmvc.dto.PersonDto;
 import com.jun.sail.springmvc.web.returnvalue.SailResponse;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,17 +30,16 @@ public class PersonController {
     private Integer height;
 
     @SailResponse("查询成功")
-    @GetMapping("/get")
-    public PersonDto getPerson() {
-        return new PersonDto(name, age, LocalDate.now(), height, LocalDateTime.now());
+    @GetMapping("/get/{sex}")
+    public PersonDto getPerson(@PathVariable("sex") SexEnum sex, @RequestParam DepartmentEnum departmentEnum) {
+        return new PersonDto(name, sex, departmentEnum, LocalDate.now(), height, LocalDateTime.now());
     }
 
     @SailResponse("保存成功")
     @PostMapping("/save")
-    public void savePerson(@RequestBody PersonDto personDto) {
-        System.out.println(personDto);
+    public PersonDto savePerson(@RequestBody PersonDto personDto) {
+        return personDto;
     }
-
 
     /**
      * 注意：使用@ConfigurationProperties必须为属性提供set方法，而Value就不必。
