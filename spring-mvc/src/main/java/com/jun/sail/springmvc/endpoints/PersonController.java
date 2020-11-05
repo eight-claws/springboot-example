@@ -35,6 +35,12 @@ public class PersonController {
         return new PersonDto(name, sex, departmentEnum, LocalDate.now(), height, LocalDateTime.now());
     }
 
+    @SailResponse("查询成功")
+    @GetMapping("/query")
+    public PersonDto getPersons(PersonDto personDto) {
+        return personDto;
+    }
+
     @SailResponse("保存成功")
     @PostMapping("/save")
     public PersonDto savePerson(@RequestBody PersonDto personDto) {

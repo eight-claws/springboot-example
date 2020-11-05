@@ -15,6 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @Author wangjun
  * @Date 2020/11/4
  **/
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class CodedEnumConverterFactory implements ConverterFactory<String, CodeEnum> {
 
     private static final Map<Class, Converter> CONVERTER_MAP = new ConcurrentHashMap<>();
