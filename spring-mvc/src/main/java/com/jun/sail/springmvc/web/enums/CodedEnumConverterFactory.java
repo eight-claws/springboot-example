@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * 参考自https://blog.csdn.net/alinyua/article/details/86383254
  *
  * 对于PathVariable，RequestParam，spring默认的枚举处理器是StringToEnumConverterFactory，是按name()来匹配的
- * 对于@RequestBody ，先按字面量反序列化，然后如果是int，再按枚举的ordinal反序列化，否则抛异常
+ * 对于@RequestBody ，spring默认的先按字面量反序列化，然后如果是int，再按枚举的ordinal反序列化，否则抛异常
  *
  * @Author wangjun
  * @Date 2020/11/4
