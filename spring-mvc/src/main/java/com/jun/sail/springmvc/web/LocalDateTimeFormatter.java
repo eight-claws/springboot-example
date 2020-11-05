@@ -11,7 +11,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 /**
- * Formatter和Converter的差别是，Converter可以转换任意类型的对象，而Formatter只能负责string和T之间的转换
+ * Formatter和Converter的差别是，Converter不同类型之间互相转换，而Formatter只能负责字符串和对象互相转换。
+ * 所以字符串和对象之间转换时，Formatter 和 Converter 的功能是一样的，从语义上说Formatter更好些，而且在转换时间，货币，数字时，可以获取Local属性
  *
  * @Author wangjun
  * @Date 2020/11/5
