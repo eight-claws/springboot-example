@@ -5,7 +5,10 @@ import com.jun.sail.springmvc.web.enums.CodedEnumConverterFactory;
 import org.springframework.context.annotation.Configuration;
 
 import org.springframework.format.FormatterRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.theme.ThemeChangeInterceptor;
 
 
 /**
@@ -33,6 +36,13 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addFormatter(LocalDateTimeFormatter.localDateFormatter());
         registry.addFormatter(LocalDateTimeFormatter.localTimeFormatter());
         registry.addFormatter(LocalDateTimeFormatter.localDateTimeFormatter());
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        // 配置拦截器
+        // registry.addInterceptor(new LocaleChangeInterceptor());
+        // registry.addInterceptor(new ThemeChangeInterceptor()).addPathPatterns("/**").excludePathPatterns("/admin/**");
     }
 
 
