@@ -3,12 +3,9 @@ package com.jun.sail.springmvc.web.enums;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.convert.converter.ConverterFactory;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 /**
  * 参考自https://blog.csdn.net/alinyua/article/details/86383254
- *
+ * <p>
  * 对于PathVariable，RequestParam，spring默认的枚举处理器是StringToEnumConverterFactory，是按name()来匹配的
  * 对于@RequestBody ，spring默认的先按字面量反序列化，然后如果是int，再按枚举的ordinal反序列化，否则抛异常
  *
@@ -18,8 +15,6 @@ import java.util.concurrent.ConcurrentHashMap;
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class CodedEnumConverterFactory implements ConverterFactory<String, CodeEnum> {
 
-    private static final Map<Class, Converter> CONVERTER_MAP = new ConcurrentHashMap<>();
-
     /**
      * 根据目标类型获取相应的转换器
      *
@@ -28,7 +23,7 @@ public class CodedEnumConverterFactory implements ConverterFactory<String, CodeE
      */
     @Override
     public <T extends CodeEnum> Converter<String, T> getConverter(Class<T> targetType) {
-        return CONVERTER_MAP.computeIfAbsent(targetType, StrToEnumConverter::new);
+        return new StrToEnumConverter(targetType);
     }
 
     /**
@@ -36,7 +31,7 @@ public class CodedEnumConverterFactory implements ConverterFactory<String, CodeE
      *
      * @param <T> 目标类型（CodedEnum的实现类）
      */
-    static class StrToEnumConverter<T extends CodeEnum> implements Converter<String, T> {
+    private final class StrToEnumConverter<T extends CodeEnum> implements Converter<String, T> {
         private Class<T> enumType;
 
         private StrToEnumConverter(Class<T> enumType) {
