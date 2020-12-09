@@ -11,8 +11,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
-
 /**
  * ApplicationRunner和CommandLineRunner是容器启动过程中的回调
  * <p>
@@ -57,10 +55,10 @@ public class ApplicationReadyListener implements ApplicationRunner, CommandLineR
             System.out.println("Let's inspect the beans provided by Spring Boot:");
 
             String[] beanNames = ctx.getBeanDefinitionNames();
-            Arrays.sort(beanNames);
-            for (String beanName : beanNames) {
-                System.out.println(beanName);
-            }
+            // Arrays.sort(beanNames);
+            // for (String beanName : beanNames) {
+            //     System.out.println(beanName);
+            // }
         };
     }
 

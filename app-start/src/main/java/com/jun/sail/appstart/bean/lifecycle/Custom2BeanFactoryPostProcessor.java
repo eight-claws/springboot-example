@@ -8,12 +8,11 @@ import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.ConstructorArgumentValues;
 import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class CustomBeanFactoryPostProcessor implements BeanFactoryPostProcessor, Ordered {
+public class Custom2BeanFactoryPostProcessor implements BeanFactoryPostProcessor, Ordered {
 
     /**
      * 用来在所有的bean definitions加载，但是还没有实例化bean之前调用本方法，所以本方法非常超前执行
@@ -22,7 +21,7 @@ public class CustomBeanFactoryPostProcessor implements BeanFactoryPostProcessor,
      */
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory configurableListableBeanFactory) throws BeansException {
-        log.info(AppStartConstant.LOG_SEPARATOR_BEAN + "[ BeanFactoryPostProcessor.postProcessBeanFactory ]");
+        log.info(AppStartConstant.LOG_SEPARATOR_BEAN + "[ BeanFactoryPostProcessor2.postProcessBeanFactory ]");
 
         BeanDefinition helloService = configurableListableBeanFactory.getBeanDefinition("myBean");
 
@@ -35,8 +34,12 @@ public class CustomBeanFactoryPostProcessor implements BeanFactoryPostProcessor,
         constructorArgumentValues.addIndexedArgumentValue(0, "make");
     }
 
+    /**
+     * 多个BeanFactoryPostProcessor实现，必须通过实现Orderd接口，才能控制多个BeanFactoryPostProcessor的执行顺序
+     * 注解@Order不管用
+     */
     @Override
     public int getOrder() {
-        return 11;
+        return 113;
     }
 }
