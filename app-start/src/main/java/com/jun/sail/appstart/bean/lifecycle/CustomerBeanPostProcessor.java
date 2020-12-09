@@ -14,7 +14,6 @@ public class CustomerBeanPostProcessor implements BeanPostProcessor {
     /**
      * 在bean进行初始化方法的回调（如InitializingBean.afterPropertiesSet或者自定义的init方法@PostConstruct）之前调用
      * 调用此方法时，bean的属性值已经设置好
-     * 可以返回一个包装类
      */
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
@@ -22,6 +21,7 @@ public class CustomerBeanPostProcessor implements BeanPostProcessor {
             MyBean myBean = (MyBean) bean;
             log.info(AppStartConstant.LOG_SEPARATOR_BEAN + "[ BeanPostProcessor.postProcessBeforeInitialization ]");
         }
+        // 这里可以返回任意对象，一般自定义增强时可以返回一个包装类，比如spring-AOP应该就是基于此
         return bean;
     }
 
