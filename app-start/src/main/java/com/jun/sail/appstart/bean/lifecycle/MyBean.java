@@ -1,14 +1,12 @@
 package com.jun.sail.appstart.bean.lifecycle;
 
 import com.jun.sail.appstart.constants.AppStartConstant;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.SmartInitializingSingleton;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.util.HashMap;
 
 /**
  * 关于SmartInitializingSingleton和InitializingBean的区别：https://blog.csdn.net/lkforce/article/details/106721239
@@ -37,9 +35,6 @@ public class MyBean implements SmartInitializingSingleton, InitializingBean {
         log.info(AppStartConstant.LOG_SEPARATOR_BEAN + "[ InitializingBean ]");
     }
 
-    @Getter
-    private HashMap<String, String> typeMap;
-
     /**
      * 用来在属性注入后执行一些初始化方法，没有返回值和参数
      * <p>
@@ -47,16 +42,11 @@ public class MyBean implements SmartInitializingSingleton, InitializingBean {
      */
     @PostConstruct
     public void init() {
-        log.info(AppStartConstant.LOG_SEPARATOR_BEAN + "[ PostConstruct ]");
-
-        typeMap = new HashMap<>();
-        typeMap.put("1", "IOS");
-        typeMap.put("2", "ANDROID");
-        typeMap.put("3", "ANDROID-GOOGLEPLAY");
-        System.out.println(this.name);
+        log.info(AppStartConstant.LOG_SEPARATOR_BEAN + "[ PostConstruct ]" + ",name is:" + name + ", age is" + age);
     }
 
     private String name;
+    private Integer age;
 
     public MyBean(String name) {
         log.info(AppStartConstant.LOG_SEPARATOR_BEAN + "[ 调用了有参构造器 ]");

@@ -23,15 +23,11 @@ public class CustomBeanFactoryPostProcessor implements BeanFactoryPostProcessor,
     public void postProcessBeanFactory(ConfigurableListableBeanFactory configurableListableBeanFactory) throws BeansException {
         log.info(AppStartConstant.LOG_SEPARATOR_BEAN + "[ BeanFactoryPostProcessor.postProcessBeanFactory ]");
 
-        BeanDefinition helloService = configurableListableBeanFactory.getBeanDefinition("myBean");
+        BeanDefinition beanDefinition = configurableListableBeanFactory.getBeanDefinition("myBean");
 
-        // 这里设置的name属性没有用，因为myBean已经有name属性，所以在实例化bean时赋值会再次变为null
-        // 不过可以用来添加一些属性，比如注入@Autowired ？
-        helloService.setAttribute("name", "make");
-
-        // 这里通过构造器的参数来指定使用哪个构造器，即通过value的类型来选用
-        ConstructorArgumentValues constructorArgumentValues = helloService.getConstructorArgumentValues();
-        constructorArgumentValues.addIndexedArgumentValue(0, "make");
+        // 这里通过构造器的参数来指定之后实例化myBean时使用哪个构造器，即通过value的类型来选用
+        ConstructorArgumentValues constructorArgumentValues = beanDefinition.getConstructorArgumentValues();
+        constructorArgumentValues.addIndexedArgumentValue(0, "ali");
     }
 
     @Override
