@@ -27,6 +27,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.jun.sail</groupId>
+            <artifactId>my-spring-boot-starter</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>

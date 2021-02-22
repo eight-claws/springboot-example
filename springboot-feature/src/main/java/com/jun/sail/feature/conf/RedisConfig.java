@@ -2,9 +2,8 @@ package com.jun.sail.feature.conf;
 
 import com.jun.sail.feature.conf.prop.DataProperties;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
@@ -13,7 +12,8 @@ import javax.annotation.PostConstruct;
  * 创建时间： 2020/5/25
  */
 
-@Component
+@Configuration
+@EnableCaching
 public class RedisConfig {
 
     @Autowired
